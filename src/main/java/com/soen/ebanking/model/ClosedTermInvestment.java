@@ -7,15 +7,13 @@ package com.soen.ebanking.model;
 
 import com.soen.ebanking.dao.ObjectDao;
 import java.io.Serializable;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import javax.persistence.*;
 
-
 @Entity
-@PrimaryKeyJoinColumn(name = "investmentPlanId")
-
 public class ClosedTermInvestment extends InvestmentPlan implements Serializable {
+
+   
 
     public ClosedTermInvestment() {
     }
@@ -28,15 +26,16 @@ public class ClosedTermInvestment extends InvestmentPlan implements Serializable
 
     }
 
+   
+
     @Override
     public void saveInvestmentPlan() {
         ObjectDao<ClosedTermInvestment> investmentPlanDao = new ObjectDao<ClosedTermInvestment>();
-         investmentPlanDao.addObject(this);
+        investmentPlanDao.addObject(this);
     }
 
     @Override
-    public void updateInvestmentPlan() 
-    {
+    public void updateInvestmentPlan() {
         ObjectDao<ClosedTermInvestment> investmentPlanDao = new ObjectDao<ClosedTermInvestment>();
         investmentPlanDao.updateObject(this, this.getInvestmentPlanId(), ClosedTermInvestment.class);
     }
@@ -48,14 +47,14 @@ public class ClosedTermInvestment extends InvestmentPlan implements Serializable
     }
 
     public static ClosedTermInvestment getClosedTermInvestmentById(long id) {
-          ObjectDao<ClosedTermInvestment> dao = new ObjectDao<ClosedTermInvestment>();
+        ObjectDao<ClosedTermInvestment> dao = new ObjectDao<ClosedTermInvestment>();
         return dao.getObjectById(id, ClosedTermInvestment.class);
     }
 
     public static ArrayList<ClosedTermInvestment> getClosedTermInvestments() {
         ObjectDao<ClosedTermInvestment> dao = new ObjectDao<ClosedTermInvestment>();
         return dao.getAllObjects(ClosedTermInvestment.class, "ClosedTermInvestment");
-       
+
     }
 
 }

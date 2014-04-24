@@ -259,12 +259,12 @@ public class Account implements Serializable {
         return accounts;
     }
 
-    public static List<Account> getInvestmentAccounts(List<Account> clientAccounts) {
-        List<Account> accounts = new ArrayList<Account>();
+    public static List<InvestmentAccount> getInvestmentAccounts(List<Account> clientAccounts) {
+        List<InvestmentAccount> accounts = new ArrayList<InvestmentAccount>();
 
         for (Account ac : clientAccounts) {
             if (ac instanceof InvestmentAccount) {
-                accounts.add(ac);
+                accounts.add((InvestmentAccount) ac);
             }
         }
         return accounts;

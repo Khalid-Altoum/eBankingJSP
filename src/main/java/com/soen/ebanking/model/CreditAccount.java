@@ -6,18 +6,13 @@
 package com.soen.ebanking.model;
 
 import com.soen.ebanking.dao.ObjectDao;
-import com.soen.ebanking.utils.JodaDateTimeConverter;
 import java.io.Serializable;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.*;
 
 
 @Entity
-@PrimaryKeyJoinColumn(name = "accountId")
-
 public class CreditAccount extends Account implements Serializable {
 
     private double creditLimit;
@@ -32,7 +27,7 @@ public class CreditAccount extends Account implements Serializable {
     private int CVS;
     // done with cards info
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private CreditPlan creditPlan;
 
     public CreditAccount() { super();

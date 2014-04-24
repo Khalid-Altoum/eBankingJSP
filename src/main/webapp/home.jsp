@@ -38,7 +38,7 @@
                         <br/>
                         <table rules="rows" class="historystyle">
                             <tr>
-                                <th width="250px">Account#</th>
+                                <th>Account#</th>
                                 <th width="250px">Account Type</th>
                                 <th width="250px">Balance</th>
                             </tr>
@@ -50,24 +50,23 @@
                             </tr>
                             <% } %>
                         </table><br/>
+                        <% ArrayList<InvestmentAccount> investmentAccounts = (ArrayList)Account.getInvestmentAccounts(client.getAccounts()); %>
                         <li>Investments</li>
                         <br/>
                         <table rules="rows" class="historystyle">
                             <tr>
-                                <th>Investment Type</th>
-                                <th width="250px">Account#</th>
-                                <th width="250px">Totals</th>
+                                
+                                <th>Account#</th>
+                                 <th width="250px">Investment Type</th>
+                                <th width="250px">Balance</th>
                             </tr>
-                            <tr>
-                                <td><a href="investmentDetail.jsp">###</a></td>
-                                <td align="center">###</td>
-                                <td align="center">###</td>
+                             <%  for (InvestmentAccount iAccount: investmentAccounts) { %>
+                             <tr>
+                                <td><span><a href="accountDetail.jsp?account=<%= iAccount.getAccountNumber()%>"><%= iAccount.getAccountNumber()%></a></span></td>
+                                <td align="center"><%=  iAccount.getInvestmentPlan().getClass().getSimpleName() %></td>
+                                <td align="center"><%= iAccount.getBalance() %></td>
                             </tr>
-                            <tr>
-                                <td><a href="investmentDetail.jsp">###</a></td>
-                                <td align="center">###</td>
-                                <td align="center">###</td>
-                            </tr>
+                            <% } %>
                         </table>
                     </ul>
                 </div>

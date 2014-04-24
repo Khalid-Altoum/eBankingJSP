@@ -3,12 +3,16 @@ package com.soen.ebanking.model;
 import com.soen.ebanking.dao.ObjectDao;
 import java.io.Serializable;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
-import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Locale;
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 //import org.joda.time.DateTime;
 
 /*
@@ -17,20 +21,17 @@ import javax.persistence.*;
  * and open the template in the editor.
  */
 @Entity
-public class AccountTransaction implements Serializable {
+public class AccountTransaction implements Serializable, Comparable  {
 
     @Id
     @GeneratedValue
-    
     private Long transactionId;
 
-   // @Convert(converter= JodaDateTimeConverter.class)
     @Temporal(javax.persistence.TemporalType.DATE)
+    
     private  Date transactionTime;
-
-
+    private  String formattedTransactionTime;
     private String description;
-
     private double debit;
     private String formattedDebit;
     private double credit;
@@ -47,14 +48,20 @@ public class AccountTransaction implements Serializable {
         this.description = description;
         this.debit = debit;
         if (this.debit == 0 ){
-        this.formattedDebit = formatDoubleToCurrency(-1*debit);
+        this.formattedDebit = " ";
         }else{
         this.formattedDebit = formatDoubleToCurrency(debit);
         }
         this.credit = credit;
+         if (this.credit == 0 ){
+        this.formattedCredit = " ";
+        }else{
         this.formattedCredit = formatDoubleToCurrency(credit);
+        }
         this.transactionTime = new Date();
-
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+	this.formattedTransactionTime = sdf.format(transactionTime);
     }
 
     public Long getTransactionId() {
@@ -132,6 +139,15 @@ public class AccountTransaction implements Serializable {
         }
     }
 
+    public String getFormattedTransactionTime() {
+        return formattedTransactionTime;
+    }
+
+    public void setFormattedTransactionTime(String formattedTransactionTime) {
+        this.formattedTransactionTime = formattedTransactionTime;
+    }
+
+    
     public void saveTransaction() {
             ObjectDao<AccountTransaction> accountDao = new ObjectDao<AccountTransaction>();
         accountDao.addObject(this);
@@ -159,9 +175,29 @@ public class AccountTransaction implements Serializable {
     }
 
     public static ArrayList<AccountTransaction> getAccountTransactions(String accountNumber) {
-        ArrayList<AccountTransaction> transactions;
-        ObjectDao accountTransactionDao = new ObjectDao();
-        transactions = accountTransactionDao.getAllObjectsByCondition("AccountTransaction", "sourceAccount_accountId = " + accountNumber);
-        return transactions;
+      
+        ObjectDao<AccountTransaction> dao = new ObjectDao<AccountTransaction>();
+        EntityManager em = dao.getEMF().createEntityManager();
+        
+        
+        CriteriaBuilder qb = em.getCriteriaBuilder();
+        CriteriaQuery<AccountTransaction> query = qb.createQuery(AccountTransaction.class);
+        Root<Account> transactions = query.from(Account.class);
+        query.where(qb.equal(transactions.get("accountNumber"), accountNumber));
+        List<AccountTransaction> result = em.createQuery(query).getResultList();
+
+          Collections.sort(result);
+        
+        return (ArrayList<AccountTransaction>) result;
     }
+   
+
+    @Override
+    public int compareTo(Object o) {
+        AccountTransaction transaction  = (AccountTransaction)o;
+        int compareage= transaction.getTransactionTime().compareTo(this.transactionTime);
+        return - compareage;
+    }
+   
+    
 }

@@ -17,11 +17,19 @@ import javax.persistence.*;
 public class InvestmentPlan implements Serializable{
     
     @Id
-    @GeneratedValue
+    @GeneratedValue 
     private Long investmentPlanId;
     private double penaltyPercent;
     private int durationInDays;
     private double investmentReturnsPercent;
+
+    public double getInvestmentReturnsPercent() {
+        return investmentReturnsPercent;
+    }
+
+    public void setInvestmentReturnsPercent(double investmentReturnsPercent) {
+        this.investmentReturnsPercent = investmentReturnsPercent;
+    }
     
 
     public Long getInvestmentPlanId() {
@@ -38,14 +46,6 @@ public class InvestmentPlan implements Serializable{
 
     public void setPenaltyPercent(double penaltyPercent) {
         this.penaltyPercent = penaltyPercent;
-    }
-
-    public double getInvestmentReturnsPercent() {
-        return investmentReturnsPercent;
-    }
-
-    public void setInvestmentReturnsPercent(double investmentReturnsPercent) {
-        this.investmentReturnsPercent = investmentReturnsPercent;
     }
 
     public int getDurationInDays() {

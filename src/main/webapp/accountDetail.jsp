@@ -1,4 +1,5 @@
-<%@page import="com.soen.ebanking.model.Account"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.soen.ebanking.model.*"%>
 <%@ page contentType="text/html; charset=UTF-8" language="java" import="java.sql.*" errorPage="" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -22,7 +23,7 @@
             </div>
             <div id="contenttext">
                 <div class="bodytext">
-                    <form name="accountDetails" action="#" method="get">
+                   
                         <fieldset class="fieldallign">
                             <legend>
                                 <h2 class="titletext">Account Summary</h2>
@@ -46,73 +47,36 @@
                                     <td>$
                                         <b><%= account.getBalance() %></b></td>
                                 </tr>
-                                <tr>
-                                    <td></td>
-                                     
-                                </tr>
+                                
                             </table>
                         </fieldset>
-                    </form>
-                    <form name="transactionHistory" id="transactionHistory" action="#" method="get">
+                    
+                        <% ArrayList<AccountTransaction> transactions = (ArrayList) AccountTransaction.getAccountTransactions(accountNumber); %>
                         <fieldset  class="fieldallign">
                             <legend>
                                 <h2 class="titletext">Transaction History</h2>
                             </legend>
-                            <p>
-                                <h4>Select:
-                                    <select>
-                                        <option value="One">1 Month</option>
-                                        <option value="Two">2 Month</option>
-                                        <option value="Three">3 Month</option>
-                                    </select>
-                                </h4>
-                            </p>
+                           
                             <table rules="rows" class="historystyle">
                                 <tr>
                                     <th>Ref#</th>
-                                    <th>Transaction Date</th>
-                                    <th>Amount</th>
+                                    <th>Date</th>
                                     <th>Description</th>
+                                    <th>Debit</th>
+                                    <th>Credit</th>
                                 </tr>
+                              <%  for (AccountTransaction transaction: transactions) { %>
                                 <tr>
-                                    <td>0001</td>
-                                    <td>Mar.11, 2014</td>
-                                    <td>$100.00</td>
-                                    <td>Withdraw</td>
+                                    <td><%= transaction.getTransactionId() %></td>
+                                    <td><%= transaction.getFormattedTransactionTime()%></td>
+                                    <td><%= transaction.getDescription()%></td>
+                                    <td><%= transaction.getFormattedDebit()%></td>
+                                    <td><%= transaction.getFormattedCredit() %></td>
                                 </tr>
-                                <tr>
-                                    <td>0001</td>
-                                    <td>Mar.11, 2014</td>
-                                    <td>$100.00</td>
-                                    <td>Withdraw</td>
-                                </tr>
-                                <tr>
-                                    <td>0001</td>
-                                    <td>Mar.11, 2014</td>
-                                    <td>$100.00</td>
-                                    <td>Withdraw</td>
-                                </tr>
-                                <tr>
-                                    <td>0001</td>
-                                    <td>Mar.11, 2014</td>
-                                    <td>$100.00</td>
-                                    <td>Withdraw</td>
-                                </tr>
-                                <tr>
-                                    <td>0001</td>
-                                    <td>Mar.11, 2014</td>
-                                    <td>$100.00</td>
-                                    <td>Withdraw</td>
-                                </tr>
-                                <tr>
-                                    <td>0001</td>
-                                    <td>Mar.11, 2014</td>
-                                    <td>$100.00</td>
-                                    <td>Withdraw</td>
-                                </tr>
+                                <% } %> 
                             </table>
                         </fieldset>
-                    </form>
+                     
                 </div>
             </div>
             <div id="leftpanel-container">

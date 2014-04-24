@@ -12,7 +12,7 @@ import com.soen.ebanking.model.InvestmentAccount;
 import com.soen.ebanking.model.InvestmentPlan;
 import com.soen.ebanking.utils.DateUtil;
 import java.util.Date;
-import org.joda.time.DateTime;
+
 
 /**
  *
@@ -21,12 +21,12 @@ import org.joda.time.DateTime;
 public class InvestmentTesting {
     public static void main(String[] args) {
         
-        Client cl = Client.getClientsById(1);
-        InvestmentPlan ip = InvestmentPlan.getInvestmentPlanById(1);
-        ClosedTermInvestment cti = new ClosedTermInvestment(.3, 60, .55);
-        cti.saveInvestmentPlan();
+       Client cl = Client.getClientsById(1);
+//        ClosedTermInvestment cti = new ClosedTermInvestment(.3, 60, .55);
+//        cti.saveInvestmentPlan();
         
-        InvestmentAccount ia = new InvestmentAccount(new Date(), DateUtil.addDays(new Date(), 60), cti);
+        InvestmentPlan ip = ClosedTermInvestment.getInvestmentPlanById(201);
+        InvestmentAccount ia = new InvestmentAccount(new Date(), DateUtil.addDays(new Date(), 60), ip);
         ia.setAccountNumber("Investment001");
         ia.setClient(cl);
         ia.saveAccount();

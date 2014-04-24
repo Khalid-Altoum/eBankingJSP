@@ -12,12 +12,10 @@ import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Random;
 import javax.persistence.*;
 
 
 @Entity
-@PrimaryKeyJoinColumn(name = "accountId")
 public class InvestmentAccount extends Account implements Serializable {
 
    // @Convert(converter= JodaDateTimeConverter.class)
@@ -27,7 +25,7 @@ public class InvestmentAccount extends Account implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date endDate;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private InvestmentPlan investmentPlan;
     
     public InvestmentAccount() {
