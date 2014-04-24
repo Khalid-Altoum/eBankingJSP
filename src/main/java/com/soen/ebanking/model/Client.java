@@ -71,13 +71,7 @@ public class Client extends User implements Serializable {
     public static Client getClientByUserName(String userName) {
         ObjectDao<Client> dao = new ObjectDao<Client>();
         EntityManager em = dao.getEMF().createEntityManager();
-        Client client = null;
-//        List<Client> clients =  em.createQuery("select c from user c where c.username = :userName")
-//                .setParameter(userName, em).getResultList();
-
-//        ReadObjectQuery tlQuery  = new ReadObjectQuery(Client.class);
-//        tlQuery.setSelectionCriteria(tlQuery.getExpressionBuilder().get("userName").equal(userName));
-//        client = (Client) em.createQuery((CriteriaQuery<Client>) tlQuery);
+        
         CriteriaBuilder qb = em.getCriteriaBuilder();
         CriteriaQuery<Client> query = qb.createQuery(Client.class);
         Root<Client> employee = query.from(Client.class);

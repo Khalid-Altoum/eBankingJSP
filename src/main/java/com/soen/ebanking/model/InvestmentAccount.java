@@ -7,7 +7,6 @@ package com.soen.ebanking.model;
 
 import com.soen.ebanking.dao.ObjectDao;
 import com.soen.ebanking.utils.DateUtil;
-import com.soen.ebanking.utils.JodaDateTimeConverter;
 import com.soen.ebanking.utils.RandomUtil;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
@@ -15,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 import javax.persistence.*;
-import org.joda.time.DateTime;
+
 
 @Entity
 @PrimaryKeyJoinColumn(name = "accountId")
@@ -100,7 +99,7 @@ public class InvestmentAccount extends Account implements Serializable {
     }
 
     @Override
-    public boolean withdraw(double amount, String description) throws IllegalAccessException, InvocationTargetException {
+    public boolean withdraw(double amount, String description) {
         boolean isDone = false;
         return isDone;
     }

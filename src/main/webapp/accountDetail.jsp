@@ -1,3 +1,4 @@
+<%@page import="com.soen.ebanking.model.Account"%>
 <%@ page contentType="text/html; charset=UTF-8" language="java" import="java.sql.*" errorPage="" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -8,6 +9,13 @@
     </head>
 
     <body>
+        <jsp:useBean id="account" class="com.soen.ebanking.model.Account"></jsp:useBean>
+        <% 
+            String accountNumber =(String) request.getParameter("account");
+            if (request.getParameter("account") != null) { 
+            account = Account.getAccountByAccountNumber(accountNumber);   
+        }%>
+              
         <div id="content">
             <div id="header-container">
                 <jsp:include page="./site-header.jsp"/>
@@ -22,28 +30,25 @@
                             <table align="center">
                                 <tr>
                                     <th>Account No:</th>
-                                    <td><input type="text" size="20"></td>
+                                    <td><b><%= account.getAccountNumber() %></b></td>
                                 </tr>
                                 <tr>
                                     <th>Account Type:</th>
-                                    <td><input type="text" size="20"></td>
+                                    <td><b><%= account.getClass().getSimpleName() %></b></td>
                                 </tr>
                                 <tr>
                                     <th>Account Balance:</th>
                                     <td>$
-                                        <input type="text" size="10"></td>
+                                        <b><%= account.getBalance()%></b></td>
                                 </tr>
                                 <tr>
                                     <th>Available Funds:</th>
                                     <td>$
-                                        <input type="text" size="10"></td>
+                                        <b><%= account.getBalance() %></b></td>
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td>&nbsp;&nbsp;&nbsp;
-                                        <button type="submit" name="submit">OK</button>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;
-                                        <button type="reset" name="reset">Reset</button></td>
+                                     
                                 </tr>
                             </table>
                         </fieldset>

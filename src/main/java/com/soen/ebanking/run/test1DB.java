@@ -23,21 +23,21 @@ public class test1DB {
 
     public static void main(String[] args)  {
 
-        Client cl = new Client();
-        cl.setFirstName("jh");
-        cl.setLastName("jf");
-        cl.setAge(99);
-        cl.setEmail("ff");
-        cl.setGender("Male");
-        cl.setUserName("01234567890");
-        cl.setPassword("7110eda4d09e062aa5e4a390b0a572ac0d2c0220");
-        cl.setPhoneNumber("514-9999");
-        //cl.setClientCard(new ClientCard("12-34-56", DateTime.now(),cl));
-        cl.saveUser();
+//        Client cl = new Client();
+//        cl.setFirstName("jh");
+//        cl.setLastName("jf");
+//        cl.setAge(99);
+//        cl.setEmail("ff");
+//        cl.setGender("Male");
+//        cl.setUserName("01234567890");
+//        cl.setPassword("7110eda4d09e062aa5e4a390b0a572ac0d2c0220");
+//        cl.setPhoneNumber("514-9999");
+//        //cl.setClientCard(new ClientCard("12-34-56", DateTime.now(),cl));
+//        cl.saveUser();
 ////
 //        
 //        
-         //  Client cl = Client.getClientsById(1);
+           Client cl = Client.getClientsById(1);
 //           System.out.println(cl1.getPassword());
            
 //        try {
@@ -66,7 +66,7 @@ public class test1DB {
 ////
 //        cl.setAccounts(accounts);
 //         cl.updateUser();
-            
+//            
             
             
 //        Client cl2 = Client.getClientsById(8);
@@ -242,7 +242,10 @@ public class test1DB {
 //        } 
 //        
        
+         ChequingAccount ca = ChequingAccount.getCheckingAccountById(51);
+         SavingAccount sa = SavingAccount.getSavingAccountById(52);
          
+         sa.withdraw(200, "Withdrawal: 200 from ca");
          
     }
 }

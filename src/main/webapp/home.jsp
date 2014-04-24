@@ -45,7 +45,7 @@
                             <%  for (Account account: personalAccounts) { %>
                             <tr>
                                 <td><span><a href="accountDetail.jsp?account=<%= account.getAccountNumber()%>"><%= account.getAccountNumber()%></a></span></td>
-                                <td align="center"><%=  account.getAccountNumber() %></td>
+                                <td align="center"><%=  account.getClass().getSimpleName() %></td>
                                 <td align="center"><%= account.getBalance() %></td>
                             </tr>
                             <% } %>

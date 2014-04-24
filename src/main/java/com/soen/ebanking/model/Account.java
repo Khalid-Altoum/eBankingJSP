@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -163,7 +166,7 @@ public class Account implements Serializable {
         return accounts;
     }
 
-    public boolean withdraw(double amount, String description) throws IllegalAccessException, InvocationTargetException {
+    public boolean withdraw(double amount, String description)  {
         boolean isDone = false;
 
         double balance = this.getBalance();
@@ -180,7 +183,7 @@ public class Account implements Serializable {
         return isDone;
     }
 
-    public boolean deposit(double amount, String description) throws IllegalAccessException, InvocationTargetException {
+    public boolean deposit(double amount, String description)  {
         boolean isDone = false;
 
         double balance = this.getBalance();
@@ -268,7 +271,24 @@ public class Account implements Serializable {
     }
 
     // TO DO
-    public void payBill(double amount) {
+    public static Account getAccountByAccountNumber(String  accountNumber) {
+        
+         ObjectDao<Account> dao = new ObjectDao<Account>();
+        EntityManager em = dao.getEMF().createEntityManager();
+        
+        
+        CriteriaBuilder qb = em.getCriteriaBuilder();
+        CriteriaQuery<Account> query = qb.createQuery(Account.class);
+        Root<Account> account = query.from(Account.class);
+        query.where(qb.equal(account.get("accountNumber"), accountNumber));
+        List<Account> result = em.createQuery(query).getResultList();
+        
+        if (result.isEmpty()) {
+            return null;
+        } else {
+            return result.get(0);
+        }
+
     }
 
 }
