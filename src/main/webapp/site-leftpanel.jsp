@@ -5,7 +5,7 @@
     <div id="leftpanel">
       <div id='cssmenu'>
         <ul>
-          <li><a href="mainPage.jsp">
+          <li><a href="home.jsp">
             <table>
                 <tr>
                     <td>
