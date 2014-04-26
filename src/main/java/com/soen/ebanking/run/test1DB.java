@@ -245,7 +245,7 @@ public class test1DB {
          ChequingAccount ca = ChequingAccount.getCheckingAccountById(51);
          SavingAccount sa = SavingAccount.getSavingAccountById(52);
          
-         ca.withdraw(600, "new: 600 from ca");
+         ca.withdraw(1600, "1600 from ca");
          
     }
 }
