@@ -38,7 +38,7 @@
                         <br/>
                         <table rules="rows" class="historystyle">
                             <tr>
-                                <th>Account#</th>
+                                <th >Account#</th>
                                 <th width="250px">Account Type</th>
                                 <th width="250px">Balance</th>
                             </tr>

@@ -174,21 +174,27 @@ public class AccountTransaction implements Serializable, Comparable  {
         return dao.getAllObjects(AccountTransaction.class, "AccountTransaction");
     }
 
-    public static ArrayList<AccountTransaction> getAccountTransactions(String accountNumber) {
+    public static List<AccountTransaction> getAccountTransactions(String accountNumber) {
       
         ObjectDao<AccountTransaction> dao = new ObjectDao<AccountTransaction>();
         EntityManager em = dao.getEMF().createEntityManager();
         
+        Account foundAccount = Account.getAccountByAccountNumber(accountNumber);
         
-        CriteriaBuilder qb = em.getCriteriaBuilder();
-        CriteriaQuery<AccountTransaction> query = qb.createQuery(AccountTransaction.class);
-        Root<Account> transactions = query.from(Account.class);
-        query.where(qb.equal(transactions.get("accountNumber"), accountNumber));
-        List<AccountTransaction> result = em.createQuery(query).getResultList();
+        Collections.sort(foundAccount.getSourceTransactions());
+        
+        return foundAccount.getSourceTransactions();
+        
+//        CriteriaBuilder qb = em.getCriteriaBuilder();
+//        CriteriaQuery<AccountTransaction> query = qb.createQuery(AccountTransaction.class);
+//        Root<AccountTransaction> transactions = query.from(AccountTransaction.class);
+//        query.where(qb.equal(transactions.get("sourceAccount"), foundAccount));
+//        query.orderBy(qb.desc(transactions.get("transactionTime"))); 
+//        List<AccountTransaction> result = em.createQuery(query).getResultList();
 
-          Collections.sort(result);
+         // Collections.sort(result);
         
-        return (ArrayList<AccountTransaction>) result;
+       // return  result;
     }
    
 
@@ -196,7 +202,7 @@ public class AccountTransaction implements Serializable, Comparable  {
     public int compareTo(Object o) {
         AccountTransaction transaction  = (AccountTransaction)o;
         int compareage= transaction.getTransactionTime().compareTo(this.transactionTime);
-        return - compareage;
+        return compareage;
     }
    
     

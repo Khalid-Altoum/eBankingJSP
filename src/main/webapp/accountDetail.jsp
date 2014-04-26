@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.soen.ebanking.model.*"%>
 <%@ page contentType="text/html; charset=UTF-8" language="java" import="java.sql.*" errorPage="" %>
@@ -51,7 +52,7 @@
                             </table>
                         </fieldset>
                     
-                        <% ArrayList<AccountTransaction> transactions = (ArrayList) AccountTransaction.getAccountTransactions(accountNumber); %>
+                        <% List<AccountTransaction> transactions =  AccountTransaction.getAccountTransactions(accountNumber); %>
                         <fieldset  class="fieldallign">
                             <legend>
                                 <h2 class="titletext">Transaction History</h2>
@@ -59,19 +60,17 @@
                            
                             <table rules="rows" class="historystyle">
                                 <tr>
-                                    <th>Ref#</th>
                                     <th>Date</th>
-                                    <th>Description</th>
-                                    <th>Debit</th>
-                                    <th>Credit</th>
+                                    <th width="400px">Description</th>
+                                    <th width="250px">Debit</th>
+                                    <th width="250px">Credit</th>
                                 </tr>
                               <%  for (AccountTransaction transaction: transactions) { %>
                                 <tr>
-                                    <td><%= transaction.getTransactionId() %></td>
-                                    <td><%= transaction.getFormattedTransactionTime()%></td>
-                                    <td><%= transaction.getDescription()%></td>
-                                    <td><%= transaction.getFormattedDebit()%></td>
-                                    <td><%= transaction.getFormattedCredit() %></td>
+                                    <td ><%= transaction.getFormattedTransactionTime()%></td>
+                                    <td align="left"><%= transaction.getDescription()%></td>
+                                    <td align="center"><%= transaction.getFormattedDebit()%></td>
+                                    <td align="center"><%= transaction.getFormattedCredit() %></td>
                                 </tr>
                                 <% } %> 
                             </table>
