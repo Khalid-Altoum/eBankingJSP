@@ -3,28 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package com.soen.ebanking.model;
 
 import com.soen.ebanking.dao.ObjectDao;
 import java.io.Serializable;
 import java.util.ArrayList;
-import javax.persistence.*;
- 
+import javax.persistence.Entity;
+
 @Entity
-public class ChequingAccount extends Account implements Serializable {
-
-   
-
+public class EWallet extends Account implements Serializable {
+    
     @Override
     public void saveAccount() {
-        ObjectDao<ChequingAccount> accountDao = new ObjectDao<ChequingAccount>();
+        ObjectDao<EWallet> accountDao = new ObjectDao<EWallet>();
          accountDao.addObject(this);
     }
 
     @Override
     public void updateAccount()  {
-        ObjectDao<ChequingAccount> checkingAccountDao = new ObjectDao<ChequingAccount>();
-         checkingAccountDao.updateObject(this, this.getAccountId(), ChequingAccount.class);
+        ObjectDao<EWallet> dao = new ObjectDao<EWallet>();
+         dao.updateObject(this, this.getAccountId(), EWallet.class);
 //        String setString = " balance = " + this.getBalance();
 //       // setString += 
 //        String whereString= " account.accountId = " + this.getAccountId();
@@ -33,19 +32,19 @@ public class ChequingAccount extends Account implements Serializable {
 
     @Override
     public void deleteAccount()  {
-        ObjectDao<ChequingAccount> checkingAccountDao = new ObjectDao<ChequingAccount>();
-        checkingAccountDao.deleteObject(this, this.getAccountId(), ChequingAccount.class);
+        ObjectDao<EWallet> dao = new ObjectDao<EWallet>();
+        dao.deleteObject(this, this.getAccountId(), EWallet.class);
     }
 
-    public static ChequingAccount getCheckingAccountById(long id) {
+    public static EWallet getEWalletById(long id) {
        
-        ObjectDao<ChequingAccount> dao = new ObjectDao<ChequingAccount>();
-        return dao.getObjectById(id, ChequingAccount.class);
+        ObjectDao<EWallet> dao = new ObjectDao<EWallet>();
+        return dao.getObjectById(id, EWallet.class);
     }
 
-    public static ArrayList<ChequingAccount> getCheckingAccounts() {
-       ObjectDao<ChequingAccount> dao = new ObjectDao<ChequingAccount>();
-        return dao.getAllObjects(ChequingAccount.class, "ChequingAccount");
+    public static ArrayList<EWallet> getCheckingAccounts() {
+       ObjectDao<EWallet> dao = new ObjectDao<EWallet>();
+        return dao.getAllObjects(EWallet.class, "EWallet");
     }
 
     @Override
