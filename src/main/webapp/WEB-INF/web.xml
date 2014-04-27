@@ -12,6 +12,14 @@
         <servlet-name>TransferServlet</servlet-name>
         <servlet-class>com.soen.ebanking.servlet.TransferServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>NewClientServlet</servlet-name>
+        <servlet-class>com.soen.ebanking.servlet.NewClientServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>NewAccountServlet</servlet-name>
+        <servlet-class>com.soen.ebanking.servlet.NewAccountServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>WithdawalServlet</servlet-name>
         <url-pattern>/WithdawalServlet</url-pattern>
@@ -23,6 +31,14 @@
     <servlet-mapping>
         <servlet-name>TransferServlet</servlet-name>
         <url-pattern>/TransferServlet</url-pattern>
+    </servlet-mapping>
+      <servlet-mapping>
+        <servlet-name>NewClientServlet</servlet-name>
+        <url-pattern>/NewClientServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NewAccountServlet</servlet-name>
+        <url-pattern>/NewAccountServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
