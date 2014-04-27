@@ -18,14 +18,16 @@
             // Check for fake username 
             Client clientWithUsername = Client.getClientByUserName(username);
             if (clientWithUsername == null) {
-                session.invalidate();
+                session.removeAttribute("username");
+                session.removeAttribute("password");
                 response.sendRedirect("failLogin.jsp");
                 return;
             }
 
             // Check for Blocked username
             if (clientWithUsername.isBlocked()) {
-                session.invalidate();
+                session.removeAttribute("username");
+                session.removeAttribute("password");
                 response.sendRedirect("blockedLogin.jsp");
                 return;
             }
