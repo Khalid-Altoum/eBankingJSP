@@ -8,6 +8,10 @@
         <servlet-name>DepositServlet</servlet-name>
         <servlet-class>com.soen.ebanking.servlet.DepositServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TransferServlet</servlet-name>
+        <servlet-class>com.soen.ebanking.servlet.TransferServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>WithdawalServlet</servlet-name>
         <url-pattern>/WithdawalServlet</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>DepositServlet</servlet-name>
         <url-pattern>/DepositServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TransferServlet</servlet-name>
+        <url-pattern>/TransferServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

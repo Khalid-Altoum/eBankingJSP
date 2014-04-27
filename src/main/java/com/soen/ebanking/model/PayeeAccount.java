@@ -10,6 +10,7 @@ import com.soen.ebanking.dao.ObjectDao;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 
 @Entity
@@ -50,7 +51,7 @@ public class PayeeAccount extends Account implements Serializable{
     }
     
 
-    public static ArrayList<PayeeAccount> getPayeeAccounts() {
+    public static List<PayeeAccount> getPayeeAccounts() {
          ObjectDao<PayeeAccount> dao = new ObjectDao<PayeeAccount>();
         return dao.getAllObjects(PayeeAccount.class, "PayeeAccount");
        

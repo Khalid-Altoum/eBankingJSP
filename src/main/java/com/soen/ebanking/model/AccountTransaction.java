@@ -14,12 +14,12 @@ import javax.persistence.*;
 public class AccountTransaction implements Serializable, Comparable  {
 
     @Id
-     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long transactionId;
 
     @Temporal(javax.persistence.TemporalType.DATE)
-    
     private  Date transactionTime;
+    
     private  String formattedTransactionTime;
     private String description;
     private double debit;
@@ -159,7 +159,7 @@ public class AccountTransaction implements Serializable, Comparable  {
         return dao.getObjectById(id, AccountTransaction.class);
     }
 
-    public static ArrayList<AccountTransaction> getTransactions() {
+    public static List<AccountTransaction> getTransactions() {
          ObjectDao<AccountTransaction> dao = new ObjectDao<AccountTransaction>();
         return dao.getAllObjects(AccountTransaction.class, "AccountTransaction");
     }

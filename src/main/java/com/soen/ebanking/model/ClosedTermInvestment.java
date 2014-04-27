@@ -8,6 +8,7 @@ package com.soen.ebanking.model;
 import com.soen.ebanking.dao.ObjectDao;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 
 @Entity
@@ -51,7 +52,7 @@ public class ClosedTermInvestment extends InvestmentPlan implements Serializable
         return dao.getObjectById(id, ClosedTermInvestment.class);
     }
 
-    public static ArrayList<ClosedTermInvestment> getClosedTermInvestments() {
+    public static List<ClosedTermInvestment> getClosedTermInvestments() {
         ObjectDao<ClosedTermInvestment> dao = new ObjectDao<ClosedTermInvestment>();
         return dao.getAllObjects(ClosedTermInvestment.class, "ClosedTermInvestment");
 

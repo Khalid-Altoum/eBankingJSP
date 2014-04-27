@@ -8,6 +8,7 @@ package com.soen.ebanking.model;
 import com.soen.ebanking.dao.ObjectDao;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 
 /**
@@ -120,7 +121,7 @@ public class Address implements Serializable {
         addressDao.deleteObject(this, this.addressId, Address.class);
     }
 
-    public ArrayList<Address> getAllAddresses() {
+    public List<Address> getAllAddresses() {
        
         ObjectDao<Address> addressDao = new ObjectDao<Address>();
          return addressDao.getAllObjects(Address.class, "Address");

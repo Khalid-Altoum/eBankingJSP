@@ -8,6 +8,7 @@ package com.soen.ebanking.model;
 import com.soen.ebanking.dao.ObjectDao;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 
 @Entity
@@ -55,7 +56,7 @@ public class Payee implements Serializable {
         return dao.getObjectById(id, Payee.class);
     }
 
-    public static ArrayList<Payee> getPayees() {
+    public static List<Payee> getPayees() {
         ObjectDao<Payee> dao = new ObjectDao<Payee>();
         return dao.getAllObjects(Payee.class, "Payee");
 

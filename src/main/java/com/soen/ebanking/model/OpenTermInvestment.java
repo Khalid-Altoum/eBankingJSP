@@ -8,6 +8,7 @@ package com.soen.ebanking.model;
 import com.soen.ebanking.dao.ObjectDao;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 
 @Entity
@@ -47,7 +48,7 @@ public class OpenTermInvestment extends InvestmentPlan implements Serializable {
         return dao.getObjectById(id, OpenTermInvestment.class);
     }
 
-    public static ArrayList<OpenTermInvestment> getOpenTermInvestments() {
+    public static List<OpenTermInvestment> getOpenTermInvestments() {
       ObjectDao<OpenTermInvestment> dao = new ObjectDao<OpenTermInvestment>();
         return dao.getAllObjects(OpenTermInvestment.class, "OpenTermInvestment");   
     }

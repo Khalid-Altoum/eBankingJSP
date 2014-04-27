@@ -90,7 +90,7 @@ public class CreditPlan implements Serializable {
         return dao.getObjectById(id, CreditPlan.class);
     }
 
-    public static ArrayList<CreditPlan> getCreditPlans() {
+    public static List<CreditPlan> getCreditPlans() {
         ObjectDao<CreditPlan> dao = new ObjectDao<CreditPlan>();
         return dao.getAllObjects(CreditPlan.class, "CreditPlan");
     }

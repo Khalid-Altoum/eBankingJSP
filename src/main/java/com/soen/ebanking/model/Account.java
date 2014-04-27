@@ -154,7 +154,7 @@ public class Account implements Serializable {
         return dao.getObjectById(id, Account.class);
     }
 
-    public static ArrayList<Account> getAccounts() {
+    public static List<Account> getAccounts() {
         ObjectDao<Account> dao = new ObjectDao<Account>();
         return dao.getAllObjects(Account.class, "Account");
     }

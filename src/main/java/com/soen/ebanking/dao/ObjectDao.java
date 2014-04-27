@@ -97,14 +97,14 @@ public class ObjectDao<T> {
         }
     }
 
-    public ArrayList getAllObjects(Class<T> ClassName, String tableName) {
+    public List getAllObjects(Class<T> ClassName, String tableName) {
        EntityManager em = this.getEMF().createEntityManager();
         CriteriaBuilder qb = em.getCriteriaBuilder();
         CriteriaQuery<T> query = qb.createQuery(ClassName);
         //Root<T> entities = query.from(ClassName);
         List<T> result = em.createQuery(query).getResultList(); 
   
-    return (ArrayList) result;
+    return  result;
     }
 
     public ArrayList getAllObjectsByCondition(String tableName, String whereString) {

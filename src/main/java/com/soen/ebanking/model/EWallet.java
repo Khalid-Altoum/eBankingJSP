@@ -9,6 +9,7 @@ package com.soen.ebanking.model;
 import com.soen.ebanking.dao.ObjectDao;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 
 @Entity
@@ -42,7 +43,7 @@ public class EWallet extends Account implements Serializable {
         return dao.getObjectById(id, EWallet.class);
     }
 
-    public static ArrayList<EWallet> getCheckingAccounts() {
+    public static List<EWallet> getCheckingAccounts() {
        ObjectDao<EWallet> dao = new ObjectDao<EWallet>();
         return dao.getAllObjects(EWallet.class, "EWallet");
     }

@@ -54,14 +54,6 @@
                                         <input name="amount" type="text" size="20"></td>
                                 </tr>
                                 <tr>
-                                    <th>Check Front:</th>
-                                    <td><input name="checkFront" id="checkFrount" accept="image/jpeg" type="file"></td>
-                                </tr>
-                                <tr>
-                                    <th>Check Back:</th>
-                                    <td><input name="checkBack" id="checkBack" accept="image/jpeg" type="file"></td>
-                                </tr>
-                                <tr>
                                     <td></td>
                                     <td>&nbsp;&nbsp;&nbsp;
                                         <button type="submit" name="submit">OK</button>

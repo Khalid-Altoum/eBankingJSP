@@ -9,6 +9,7 @@ package com.soen.ebanking.model;
 import com.soen.ebanking.dao.ObjectDao;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 
 
@@ -77,7 +78,7 @@ public class InvestmentPlan implements Serializable{
            return dao.getObjectById(id, InvestmentPlan.class);
     }
 
-    public static ArrayList<InvestmentPlan> getInvestmentPlans() {
+    public static List<InvestmentPlan> getInvestmentPlans() {
          ObjectDao<InvestmentPlan> dao = new ObjectDao<InvestmentPlan>();
         return dao.getAllObjects(InvestmentPlan.class, "InvestmentPlan");
        

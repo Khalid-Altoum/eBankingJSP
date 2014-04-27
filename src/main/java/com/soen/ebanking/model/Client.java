@@ -64,7 +64,7 @@ public class Client extends User implements Serializable {
 
     }
 
-    public static ArrayList<Client> getClients() {
+    public static List<Client> getClients() {
         ObjectDao<Client> dao = new ObjectDao<Client>();
         return dao.getAllObjects(Client.class, "client");
 

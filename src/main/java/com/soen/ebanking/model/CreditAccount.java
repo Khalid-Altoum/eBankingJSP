@@ -9,6 +9,7 @@ import com.soen.ebanking.dao.ObjectDao;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 
 
@@ -104,7 +105,7 @@ public class CreditAccount extends Account implements Serializable {
         return dao.getObjectById(id, CreditAccount.class);
     }
 
-    public static ArrayList<CreditAccount> getCreditAccounts() {
+    public static List<CreditAccount> getCreditAccounts() {
         ObjectDao<CreditAccount> dao = new ObjectDao<CreditAccount>();
         return dao.getAllObjects(CreditAccount.class, "CreditAccount");
     }

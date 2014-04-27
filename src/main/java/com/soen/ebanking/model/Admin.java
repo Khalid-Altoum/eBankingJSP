@@ -41,7 +41,7 @@ public class Admin extends User implements Serializable{
 
     }
 
-    public static ArrayList<Admin> getClients() {
+    public static List<Admin> getClients() {
         ObjectDao<Admin> dao = new ObjectDao<Admin>();
         return dao.getAllObjects(Admin.class, "Admin");
 
