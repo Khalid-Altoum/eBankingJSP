@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class Payee implements Serializable {
 
     @Id
-   @GeneratedValue(strategy = GenerationType.AUTO)
+   @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long payeeId;
     private String name;
 

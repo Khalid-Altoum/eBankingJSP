@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class AccountTransaction implements Serializable, Comparable  {
 
     @Id
-     @GeneratedValue(strategy = GenerationType.AUTO)
+     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long transactionId;
 
     @Temporal(javax.persistence.TemporalType.DATE)

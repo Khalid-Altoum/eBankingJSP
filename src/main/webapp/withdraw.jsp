@@ -12,7 +12,7 @@
     </head>
 
     <body>
-        <jsp:useBean id="client1" class="com.soen.ebanking.model.Client"></jsp:useBean>
+        <jsp:useBean id="client1" class="com.soen.ebanking.model.Client" scope="page"></jsp:useBean>
         <%
             Long id = (Long) session.getAttribute("currentClientId");
 

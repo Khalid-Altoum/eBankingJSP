@@ -17,7 +17,7 @@ import javax.persistence.*;
 public class Role implements Serializable{
 
     @Id
-     @GeneratedValue(strategy = GenerationType.AUTO)
+     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private double roleId;
     
     private String roleName;

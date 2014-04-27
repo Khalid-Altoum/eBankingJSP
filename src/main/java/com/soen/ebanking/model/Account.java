@@ -21,7 +21,7 @@ import javax.persistence.criteria.Root;
 public class Account implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     protected Long accountId;
     private String accountNumber;
     private double balance;

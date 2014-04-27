@@ -18,7 +18,7 @@ import javax.persistence.*;
 public class Address implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long addressId;
     private String streetNumber;
     private String streetName;
