@@ -18,7 +18,7 @@ import javax.persistence.*;
 public class ClientCard implements Serializable {
 
     @Id
-    @GeneratedValue
+     @GeneratedValue(strategy = GenerationType.AUTO)
     protected Long clientCardId;
 
     private String cardNumber;

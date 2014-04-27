@@ -35,38 +35,46 @@
                             <legend>
                                 <h2  class="largeredtext">Withdraw Money</h2>
                             </legend>
-                             <table align="center">
-                            <tr>
-                                <% ArrayList<Account> personalAccounts1 = (ArrayList) Account.getPersonalAccount(client1.getAccounts()); %>
-                                <th>Withdraw From:</th>
-                                <td>
-                                    <select name="accounts">
-                                        <%
-                                            for (Account acc : personalAccounts1) {
-                                        %>
-                                        <option value="<%= acc.getAccountId()%>" > <%=  acc.getClass().getSimpleName()%>: <%= acc.getAccountNumber()%></option>
-                                        <% }%>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Amount:</th>
-                                <td>$
-                                    <input name="amount" type="text" size="20">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>&nbsp;&nbsp;&nbsp;
-                                    <button type="submit" name="submit">OK</button>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <button type="reset" name="reset">Reset</button></td>
-                            </tr>
+                            <table align="center">
+                                <tr>
+                                    <% ArrayList<Account> personalAccounts1 = (ArrayList) Account.getPersonalAccount(client1.getAccounts()); %>
+                                    <th>Withdraw From:</th>
+                                    <td>
+                                        <select name="accounts">
+                                            <%
+                                                for (Account acc : personalAccounts1) {
+                                            %>
+                                            <option value="<%= acc.getAccountId()%>" > <%=  acc.getClass().getSimpleName()%>: <%= acc.getAccountNumber()%></option>
+                                            <% }%>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Amount:</th>
+                                    <td>$
+                                        <input name="amount" type="text" size="20">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>&nbsp;&nbsp;&nbsp;
+                                        <button type="submit" name="submit">OK</button>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <button type="reset" name="reset">Reset</button></td>
+                                </tr>
                             </table>
-                            
+                            <%
+                                String successString = (session.getAttribute("withdrawalSuccessfulMSG")  != null) ? (String) session.getAttribute("withdrawalSuccessfulMSG") : " ";
+                                String errorString = (session.getAttribute("withdrawalErrorMSG") != null) ? (String) session.getAttribute("withdrawalErrorMSG") : " ";
+                            %>      
+                            <p style="font-style:italic;"> <b style="color:#00FF00"> <%= successString%>  </b></p>           
+                            <p style="font-style:italic;"> <b style="color:#F00"> <%= errorString%> </b></p>
                         </fieldset>
                     </form>
-                    
+                    <% 
+                    session.removeAttribute("withdrawalSuccessfulMSG");
+                    session.removeAttribute("withdrawalErrorMSG");
+                    %>
                 </div>
             </div>
             <div id="leftpanel-container">

@@ -17,7 +17,7 @@ import javax.persistence.*;
 public class InvestmentPlan implements Serializable{
     
     @Id
-    @GeneratedValue 
+   @GeneratedValue(strategy=GenerationType.AUTO) 
     private Long investmentPlanId;
     private double penaltyPercent;
     private int durationInDays;

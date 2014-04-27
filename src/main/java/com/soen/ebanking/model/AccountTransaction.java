@@ -5,26 +5,16 @@ import java.io.Serializable;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-//import org.joda.time.DateTime;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 @Entity
 public class AccountTransaction implements Serializable, Comparable  {
 
     @Id
-    @GeneratedValue
+     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long transactionId;
 
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -176,12 +166,9 @@ public class AccountTransaction implements Serializable, Comparable  {
 
     public static List<AccountTransaction> getAccountTransactions(String accountNumber) {
       
-        ObjectDao<AccountTransaction> dao = new ObjectDao<AccountTransaction>();
-        EntityManager em = dao.getEMF().createEntityManager();
-        
         Account foundAccount = Account.getAccountByAccountNumber(accountNumber);
         
-        Collections.sort(foundAccount.getSourceTransactions());
+//        Collections.sort(foundAccount.getSourceTransactions());
         
         return foundAccount.getSourceTransactions();
         

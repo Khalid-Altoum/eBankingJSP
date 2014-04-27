@@ -30,6 +30,7 @@
       <property name="eclipselink.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="eclipselink.jdbc.url" value="jdbc:mysql://localhost:3306/ebanking"/>
       <property name="eclipselink.logging.level" value="FINEST"/>
+      <property name="eclipselink.cache.shared.default" value="false"/>
       <!-- 
       <property name="eclipselink.ddl-generation" value="create-tables"/>
       <property name="eclipselink.ddl-generation.output-mode" value="database"/>

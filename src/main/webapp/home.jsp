@@ -49,7 +49,24 @@
                                 <td align="center"><%= account.getBalance() %></td>
                             </tr>
                             <% } %>
-                        </table><br/>
+                        </table>
+                        <br/>
+                       <%  EWallet eWallet = Account.getEwalletForClient(client); %>  
+                         <li>eWallet</li>
+                        <br/>
+                        <table rules="rows" class="historystyle">
+                            <tr>
+                                <th >Account#</th>
+                                <th width="250px">Balance</th>
+                            </tr>
+                            <tr>
+                                <th ><%= eWallet.getAccountNumber() %></th>
+                                <th width="250px"><%= eWallet.getBalance() %></th>
+                            </tr>
+                           </table> 
+                            
+                            
+                        <br/>
                         <% ArrayList<InvestmentAccount> investmentAccounts = (ArrayList)Account.getInvestmentAccounts(client.getAccounts()); %>
                         <li>Investments</li>
                         <br/>

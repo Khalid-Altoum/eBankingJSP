@@ -12,42 +12,47 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class WithdawalServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        double amount = 0;
+        String errorMSG1="Error : You don't have sufficient funds.";
+        String successMSG = "Withdrawal"+ amount +" done successfully";
+        boolean isDone = false;
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
+
         try {
 
             long selectedAccountId = 0;
             if (request.getParameter("accounts") != null) {
                 selectedAccountId = Long.parseLong(request.getParameter("accounts"));
-//                return;
             }
-            double amount = 0;
+            
             if (request.getParameter("amount") != null) {
                 amount = Double.parseDouble(request.getParameter("amount"));
-//                 return;
+                successMSG = "Withdrawal $"+ amount +" done successfully";
+
             }
 
             if (amount != 0 && selectedAccountId != 0) {
                 Account acc = Account.getAccountById(selectedAccountId);
-                acc.withdraw(amount, "Lets see");
-            }else{ out.println("not able to transfer both are 0s.");}
-              request.setAttribute("withdawalMsg", "I am ok, withdrwal done"); 
+                isDone =acc.withdraw(amount,"$"+ amount + " from " + acc.getAccountNumber());
+            } 
+              if (! isDone){
+              session.setAttribute("withdrawalSuccessfulMSG", "");
+               session.setAttribute("withdrawalErrorMSG", errorMSG1); 
+              }else{
+              session.setAttribute("withdrawalSuccessfulMSG",successMSG );
+               session.setAttribute("withdrawalErrorMSG", ""); 
+              }
+              
             response.sendRedirect("withdraw.jsp");
-            return;
         } finally {
             out.close();
         }

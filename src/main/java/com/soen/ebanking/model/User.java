@@ -16,7 +16,7 @@ import javax.persistence.*;
 public class User implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private long userId;
 
     private String userName;

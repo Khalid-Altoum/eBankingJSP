@@ -21,14 +21,14 @@ import javax.persistence.criteria.Root;
 public class Account implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     protected Long accountId;
     private String accountNumber;
     private double balance;
     private String currency;
     private String currencySign;
-    
-   // @Convert(converter= JodaDateTimeConverter.class)
+
+    // @Convert(converter= JodaDateTimeConverter.class)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date openedDate;
 
@@ -133,7 +133,7 @@ public class Account implements Serializable {
         this.currencySign = currencySign;
     }
 
-  // ecliseLink Methods
+    // ecliseLink Methods
     public void saveAccount() {
         ObjectDao<Account> accountDao = new ObjectDao<Account>();
         accountDao.addObject(this);
@@ -166,35 +166,40 @@ public class Account implements Serializable {
         return accounts;
     }
 
-    public boolean withdraw(double amount, String description)  {
-        boolean isDone = false;
+    public static EWallet getEwalletForClient(Client client) {
 
-        double balance = this.getBalance();
-        balance -= amount;
-        this.setBalance(balance);
+        for (Account a : client.getAccounts()) {
+            if (a instanceof EWallet) {
+                return (EWallet) a;
+            }
+        }
+
+        return null;
+    }
+
+    public boolean withdraw(double amount, String description) {
+        boolean isDone = false;
         try {
-            this.updateAccount();
-            isDone = true;
-            AccountTransaction tr = new AccountTransaction(this, amount, 0, "Withdrawl: " + description);
-            tr.saveTransaction();
+            if (getEwalletForClient(this.client) != null) {
+                isDone = transferWithoutRecodingTransaction(this, getEwalletForClient(this.client), amount);
+                AccountTransaction tr = new AccountTransaction(this, amount, 0, "Withdrawl: " + description);
+                tr.saveTransaction();
+            }
         } catch (Exception e) {
             return false;
         }
         return isDone;
     }
 
-    public boolean deposit(double amount, String description)  {
+    public boolean deposit(double amount, String description) {
         boolean isDone = false;
 
-        double balance = this.getBalance();
-        balance += amount;
-        this.setBalance(balance);
         try {
-            this.updateAccount();
-            isDone = true;
-
-            AccountTransaction tr = new AccountTransaction(this, 0, amount, "Deposit:" + description);
-            tr.saveTransaction();
+            if (getEwalletForClient(this.client) != null) {
+                isDone = transferWithoutRecodingTransaction(getEwalletForClient(this.client), this, amount);
+                AccountTransaction tr = new AccountTransaction(this, 0, amount, "Deposit:" + description);
+                tr.saveTransaction();
+            }
         } catch (Exception e) {
             return false;
         }
@@ -233,6 +238,33 @@ public class Account implements Serializable {
 
     }
 
+    private static boolean transferWithoutRecodingTransaction(Account sourceAccount, Account targetAccount, double amount) {
+
+        double sourceBalance = sourceAccount.getBalance();
+        double targetBalance = targetAccount.getBalance();
+        boolean isDone = false;
+
+        if (sourceBalance >= amount) {
+            sourceBalance -= amount;
+            targetBalance += amount;
+
+            try {
+                sourceAccount.setBalance(sourceBalance);
+                sourceAccount.updateAccount();
+
+                targetAccount.setBalance(targetBalance);
+                targetAccount.updateAccount();
+
+                isDone = true;
+
+            } catch (Exception e) {
+                return false;
+            }
+        }
+        return isDone;
+
+    }
+
     @Override
     public String toString() {
         return "Account{" + "accountId=" + accountId + ", accountNumber=" + accountNumber + ", balance=" + balance + ", currency=" + currency + ", currencySign=" + currencySign + ", openedDate=" + openedDate + ", client=" + client + ", sourceTransactions=" + sourceTransactions + ", status=" + status + '}';
@@ -252,13 +284,14 @@ public class Account implements Serializable {
     public static List<Account> getPersonalAccount(List<Account> clientAccounts) {
         List<Account> accounts = new ArrayList<Account>();
         for (Account ac : clientAccounts) {
-            if (!(ac instanceof PayeeAccount) && !(ac instanceof InvestmentAccount)) {
+            if (!(ac instanceof PayeeAccount) && !(ac instanceof InvestmentAccount) && !(ac instanceof EWallet)) {
                 accounts.add(ac);
             }
         }
         return accounts;
     }
 
+    
     public static List<InvestmentAccount> getInvestmentAccounts(List<Account> clientAccounts) {
         List<InvestmentAccount> accounts = new ArrayList<InvestmentAccount>();
 
@@ -271,18 +304,17 @@ public class Account implements Serializable {
     }
 
     // TO DO
-    public static Account getAccountByAccountNumber(String  accountNumber) {
-        
-         ObjectDao<Account> dao = new ObjectDao<Account>();
+    public static Account getAccountByAccountNumber(String accountNumber) {
+
+        ObjectDao<Account> dao = new ObjectDao<Account>();
         EntityManager em = dao.getEMF().createEntityManager();
-        
-        
+
         CriteriaBuilder qb = em.getCriteriaBuilder();
         CriteriaQuery<Account> query = qb.createQuery(Account.class);
         Root<Account> account = query.from(Account.class);
         query.where(qb.equal(account.get("accountNumber"), accountNumber));
         List<Account> result = em.createQuery(query).getResultList();
-        
+
         if (result.isEmpty()) {
             return null;
         } else {

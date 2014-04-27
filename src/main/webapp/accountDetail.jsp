@@ -11,7 +11,7 @@
     </head>
 
     <body>
-        <jsp:useBean id="account" class="com.soen.ebanking.model.Account"></jsp:useBean>
+        <jsp:useBean id="account" class="com.soen.ebanking.model.Account" scope="page" ></jsp:useBean>
         <% 
             String accountNumber =(String) request.getParameter("account");
             if (request.getParameter("account") != null) { 

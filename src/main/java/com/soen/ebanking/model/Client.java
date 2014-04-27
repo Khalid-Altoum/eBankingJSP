@@ -21,7 +21,8 @@ public class Client extends User implements Serializable {
 
     @OneToMany(mappedBy = "client")
     private List<Account> accounts;
-
+    
+    
     public long getAge() {
         return age;
     }
@@ -38,6 +39,7 @@ public class Client extends User implements Serializable {
         this.accounts = accounts;
     }
 
+      
     @Override
     public void saveUser() {
         ObjectDao<Client> userDao = new ObjectDao<Client>();

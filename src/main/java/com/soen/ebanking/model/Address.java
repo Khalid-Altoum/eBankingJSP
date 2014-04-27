@@ -15,11 +15,10 @@ import javax.persistence.*;
  * @author HMD
  */
 @Entity
-@Table(name = "Address")
 public class Address implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long addressId;
     private String streetNumber;
     private String streetName;

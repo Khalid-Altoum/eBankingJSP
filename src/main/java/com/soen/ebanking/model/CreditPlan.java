@@ -20,7 +20,7 @@ import javax.persistence.*;
 public class CreditPlan implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     protected Long creditPlanId;
     private double cashAdvanceInterest;
     private double interestRate;
