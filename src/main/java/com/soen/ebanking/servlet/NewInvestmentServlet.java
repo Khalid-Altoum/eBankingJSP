@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.soen.ebanking.servlet;
 
-import com.soen.ebanking.model.Account;
 import com.soen.ebanking.model.ChequingAccount;
-import com.soen.ebanking.model.Client;
+import com.soen.ebanking.model.ClosedTermInvestment;
+import com.soen.ebanking.model.InvestmentPlan;
+import com.soen.ebanking.model.OpenTermInvestment;
 import com.soen.ebanking.model.SavingAccount;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,31 +17,39 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class NewAccountServlet extends HttpServlet {
+public class NewInvestmentServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            /* TODO output your page here. You may use following sample code. */
-            String clientID, accountType;
-            Double balance;
-            clientID = request.getParameter("clientID");
-            accountType = request.getParameter("accountType");
-            balance = Double.parseDouble(request.getParameter("balance"));
-            
-            Client theClient = Client.getClientsById(Long.parseLong(clientID));
-            
-            Account newAccount; 
-            if (accountType.equals("Saving")) {
-                newAccount= new SavingAccount(balance,theClient);
-            } else {
-                newAccount= new ChequingAccount(balance,theClient);
+           String investmentType = request.getParameter("investmentType");
+           
+            double investmentReturnsPercent=0;
+            if (request.getParameter("investmentReturnsPercent") != null) {
+                investmentReturnsPercent = Double.parseDouble(request.getParameter("investmentReturnsPercent"));
             }
-            newAccount.saveAccount();
-            response.sendRedirect("./admin/adminFinished.jsp");
 
+            int durationInDays=0;
+            if (request.getParameter("durationInDays") != null) {
+                durationInDays = Integer.parseInt(request.getParameter("durationInDays"));
+            }
+
+            double penaltyPercent=0;
+            if (request.getParameter("penaltyPercent") != null) {
+                penaltyPercent = Double.parseDouble(request.getParameter("penaltyPercent"));
+            }
+
+            InvestmentPlan newInvestmentPlan;
+            if (investmentType.equals("closed")) {
+                newInvestmentPlan = new ClosedTermInvestment(penaltyPercent, durationInDays, investmentReturnsPercent);
+            } else {
+               newInvestmentPlan = new OpenTermInvestment(penaltyPercent, durationInDays, investmentReturnsPercent);
+            }
+            
+            newInvestmentPlan.saveInvestmentPlan();
+            response.sendRedirect("./admin/adminFinished.jsp");
         } finally {
             out.close();
         }

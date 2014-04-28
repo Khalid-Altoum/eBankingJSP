@@ -1,9 +1,3 @@
-<%-- 
-    Document   : adminConsole
-    Created on : Apr 27, 2014, 10:41:21 AM
-    Author     : Hongrui Guan
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

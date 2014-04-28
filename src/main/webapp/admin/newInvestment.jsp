@@ -22,33 +22,34 @@
                     <legend>
                         <h2 class="largeredtext">New Investment Plan</h2>
                     </legend>
-                    <form>
+                    
+                         <form  name="frmNewInvestment" action="/eBanking/NewInvestmentServlet" method="post">
                         <table>
                             <tr>
                                 <td>Return Percentage:</td>
                                 <td>
-                                    <input type="text" size="20">
+                                    <input name="investmentReturnsPercent" type="text" size="20">
                                 </td>
                             </tr>
                             <tr>
                                 <td>Duration (in days):</td>
                                 <td>
-                                    <input type="text" size="20">
+                                    <input name="durationInDays"type="text" size="20">
                                 </td>
                             </tr>
                             <tr>
                                 <td>Penalty Percentage:</td>
                                 <td>
-                                    <input type="text" size="20">
+                                    <input name="penaltyPercent" type="text" size="20">
                                 </td>
                             </tr>
                             <tr>
                                 <td>Investment Type:</td>
                                 <td>
-                                    <select>
+                                    <select name="investmentType">
                                         <option value="" disabled="disabled" selected="selected">- Investment Type -</option>
-                                        <option value="Chequing">Open Term</option>
-                                        <option value="Savings">Closed Term</option>
+                                        <option value="open">Open Term</option>
+                                        <option value="closed">Closed Term</option>
                                     </select>
                                 </td>
                             </tr>
@@ -56,6 +57,7 @@
                                 <td></td>
                                 <td>
                                     <button type="submit" name="submit">OK</button>
+                                    <button type="reset" name="reset">Clear</button>
                                 </td>
                             </tr>
                         </table>

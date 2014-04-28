@@ -17,15 +17,7 @@ import java.util.List;
 public class Testing01 {
 
     public static void main(String[] args) {
-//        Account ac = Account.getAccountByAccountNumber("Check001");
-//        System.out.println(ac.getBalance());
-
-//        List<AccountTransaction> transations = AccountTransaction.getAccountTransactions("Check001");
-//
-//        for (AccountTransaction t : transations) {
-//            System.out.println("ID:"+t.getTransactionId()+" Time: "+t.getFormattedTransactionTime()+" Desc: "+t.getDescription()+" Debit: "+t.getFormattedDebit()+" Credit: "+t.getFormattedCredit());
-//        }
-        
+     
 //        Client cl = new Client();
 //        cl.setFirstName("Khalid");
 //        cl.setLastName("Altoum");
@@ -37,39 +29,51 @@ public class Testing01 {
 //        cl.setPhoneNumber("514-999-0000");
 //        //cl.setClientCard(new ClientCard("12-34-56", DateTime.now(),cl));
 //        cl.saveUser();
-//
+////
 //        ChequingAccount ca = new ChequingAccount();
 //        ca.setAccountNumber("105522446055");
 //        ca.setBalance(5000);
 //        ca.setOpenedDate(new Date());
 //        ca.setClient(cl);
 //        ca.saveAccount();
-//        
-//        
+////        
+////        
 //         SavingAccount sa = new SavingAccount();
 //        sa.setAccountNumber("450000000002");
 //        sa.setBalance(1000);
 //        sa.setOpenedDate(new Date());
 //        sa.setClient(cl);
 //        sa.saveAccount();
-//        
+////        
 //         List<Account> accounts = new ArrayList<Account>();
 //        accounts.add(sa);
 //        accounts.add(ca);
 //        cl.setAccounts(accounts);
 //        cl.updateUser();
-        
+//        
 //         Client cl1 = Client.getClientsById(1);
 //        EWallet ew = new EWallet();
 //        ew.setAccountNumber("eWallet");
 //        ew.setClient(cl1);
 //        ew.saveAccount();
+//        
+//        
+//        Client cl2 = Client.getClientsById(1);
+//        EWallet ewalletForClient = Account.getEwalletForClient(cl2);
+//        System.out.println(ewalletForClient.getBalance());
         
         
-        Client cl1 = Client.getClientsById(51);
-        EWallet ewalletForClient = Account.getEwalletForClient(cl1);
-        System.out.println(ewalletForClient.getBalance());
         
+         Admin admin = new Admin();
+        admin.setFirstName("Admin");
+        admin.setLastName("Admin");
+        admin.setEmail("peyman@gmail.com");
+        admin.setGender("Male");
+        admin.setUserName("admin");
+        admin.setPassword("7110eda4d09e062aa5e4a390b0a572ac0d2c0220");
+        admin.setPhoneNumber("514-999-0000");
+        //cl.setClientCard(new ClientCard("12-34-56", DateTime.now(),cl));
+        admin.saveUser();
         
         
         

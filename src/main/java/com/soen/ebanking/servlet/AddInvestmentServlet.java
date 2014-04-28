@@ -1,47 +1,52 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.soen.ebanking.servlet;
 
 import com.soen.ebanking.model.Account;
-import com.soen.ebanking.model.ChequingAccount;
 import com.soen.ebanking.model.Client;
-import com.soen.ebanking.model.SavingAccount;
+import com.soen.ebanking.model.InvestmentAccount;
+import com.soen.ebanking.model.InvestmentPlan;
+import com.soen.ebanking.utils.DateUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class NewAccountServlet extends HttpServlet {
+public class AddInvestmentServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            /* TODO output your page here. You may use following sample code. */
-            String clientID, accountType;
-            Double balance;
+            String clientID, investmentID, investmentAccountNumber, accountID;
+            double balance = 0;
             clientID = request.getParameter("clientID");
-            accountType = request.getParameter("accountType");
+            investmentID = request.getParameter("investmentID");
+            accountID = request.getParameter("accountID");
+            investmentAccountNumber = request.getParameter("investmentAccountNumber");
             balance = Double.parseDouble(request.getParameter("balance"));
-            
-            Client theClient = Client.getClientsById(Long.parseLong(clientID));
-            
-            Account newAccount; 
-            if (accountType.equals("Saving")) {
-                newAccount= new SavingAccount(balance,theClient);
-            } else {
-                newAccount= new ChequingAccount(balance,theClient);
-            }
-            newAccount.saveAccount();
-            response.sendRedirect("./admin/adminFinished.jsp");
 
+            Client theClient = Client.getClientsById(Long.parseLong(clientID));
+            InvestmentPlan thePlan = InvestmentPlan.getInvestmentPlanById(Long.parseLong(investmentID));
+            Account fundsSource = Account.getAccountById(Long.parseLong(accountID));
+
+            if (fundsSource.getBalance() < balance) {
+                //show error not enough balance
+
+            } else {
+
+                
+                Date endDate = DateUtil.addDays(new Date(), thePlan.getDurationInDays());
+                InvestmentAccount iAcc = new InvestmentAccount(new Date(), endDate, thePlan);
+                iAcc.setAccountNumber(investmentAccountNumber);
+                iAcc.setClient(theClient);
+                iAcc.saveAccount();
+                
+                Account.transfer(fundsSource, iAcc, balance, "$" + balance + " from " + fundsSource.getAccountNumber() + " to Inverstment Account: " + iAcc.getAccountNumber());
+                response.sendRedirect("./admin/adminFinished.jsp");
+            }
         } finally {
             out.close();
         }

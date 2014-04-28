@@ -26,10 +26,10 @@
                 <legend>
                     <h2 class="largeredtext">Register New Account</h2>
                 </legend>
-                <form name = "newClient" method = "post" action="/eBankingJSP/NewAccountServlet">
+                <form name = "newClient" method = "post" action="/eBanking/NewAccountServlet">
                     <table>
                         <tr>
-                            <td>User Name:</td>
+                            <td>Client Name:</td>
                             <td></td>
                             <td>
                                 <select name="clientID">

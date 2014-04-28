@@ -19,7 +19,11 @@ public class SavingAccount extends Account implements Serializable{
     
   
     public SavingAccount(){}
-    
+   
+    public SavingAccount(double balance, Client client){
+    this.setBalance(balance);
+    this.setClient(client);
+    }
     
     
       public void saveSavingAccount() {
