@@ -47,10 +47,12 @@
                                 <td>Card Number:</td>
                                 <td><input name="cardNumber" type="text" size="20" ></td>
                             </tr>
+                            <tr>
                             <td>Expiry Date:</td>
                             <td><input name="expiryDate" type="text" size="20" ></td>
                             <td> yyyy/mm/dd e.x 2015/01/31  </td>
                             </tr>
+                            <tr>
                             <td>Client Password:</td>
                             <td><input name="clientPassword" type="password" size="20" ></td>
                             <td> Password length between 6 to 20  </td>

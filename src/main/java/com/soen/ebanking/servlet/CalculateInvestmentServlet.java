@@ -1,12 +1,12 @@
 package com.soen.ebanking.servlet;
 
-import com.soen.ebanking.model.Client;
-import com.soen.ebanking.model.ClientCard;
-import com.soen.ebanking.utils.SHA1Util;
+import com.soen.ebanking.model.InvestmentAccount;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -15,51 +15,32 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class NewClientCardServlet extends HttpServlet {
 
+public class CalculateInvestmentServlet extends HttpServlet {
+
+   
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
         try {
-
-            String cardNumber, clientPassword, confirmClientPassword;
-            cardNumber = request.getParameter("cardNumber");
-            // Date expiryDate = Date.valueOf( );
-            clientPassword = request.getParameter("clientPassword");
-            confirmClientPassword = request.getParameter("confirmClientPassword");
-
-            if (clientPassword.length() < 6 || clientPassword.length() > 20) {
-                session.setAttribute("successfulMSG", "");
-                session.setAttribute("errorMSG", "Error: Password length should be between 6 and 20. ");
-                response.sendRedirect("./admin/addClientCard.jsp");
-                return;
-            }
-            if (!clientPassword.equals(confirmClientPassword)) {
-                session.setAttribute("successfulMSG", "");
-                session.setAttribute("errorMSG", "Error: Password & Confirm password mismatch! ");
-                response.sendRedirect("./admin/addClientCard.jsp");
-                return;
-            }
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-            java.util.Date expiryDate = null;
+             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+            java.util.Date date = null;
             try {
-                expiryDate = sdf.parse(request.getParameter("expiryDate"));
+                date = sdf.parse(request.getParameter("date"));
             } catch (ParseException ex) {
-               session.setAttribute("errorMSG", "Error: Date is not in the write format! ");
-                response.sendRedirect("./admin/addClientCard.jsp");  
+                session.setAttribute("errorMSG", "Error: Password & Confirm password mismatch! ");
+                response.sendRedirect("./admin/calculateInvestment.jsp");
             }
-
-            long clientID = Long.parseLong(request.getParameter("clientID"));
-            Client cl = Client.getClientsById(clientID);
-            ClientCard cc = new ClientCard(cardNumber, expiryDate, cl);
-            cc.saveClientCard();
-            String passwordSHA = SHA1Util.sha1(clientPassword);
-            cl.setPassword(passwordSHA);
-            cl.setUserName(cardNumber);
-            cl.updateUser();
-
+            
+            List<InvestmentAccount> ias = InvestmentAccount.getInvestmentAccounts();
+            for(InvestmentAccount ia : ias){
+            double profit  = ia.calculateReturnOfInvestment(date);
+            ia.setBalance(ia.getBalance()+profit);
+            ia.saveAccount();
+            }
+            
             response.sendRedirect("./admin/adminFinished.jsp");
         } finally {
             out.close();

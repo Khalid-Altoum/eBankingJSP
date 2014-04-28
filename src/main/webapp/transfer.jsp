@@ -44,7 +44,7 @@
                                             <%
                                                 for (Account acc : personalAccounts1) {
                                             %>
-                                            <option value="<%= acc.getAccountId()%>" > <%=  acc.getClass().getSimpleName()%>: <%= acc.getAccountNumber()%></option>
+                                            <option value="<%= acc.getAccountId()%>" > <%=  acc.getClass().getSimpleName()%>: <%= acc.getAccountNumber()%> - $<%= acc.getBalance()%></option>
                                             <% }%>
                                         </select>
                                     </td>
@@ -56,7 +56,7 @@
                                             <%
                                                 for (Account acc : personalAccounts1) {
                                             %>
-                                            <option value="<%= acc.getAccountId()%>" > <%=  acc.getClass().getSimpleName()%>: <%= acc.getAccountNumber()%></option>
+                                            <option value="<%= acc.getAccountId()%>" > <%=  acc.getClass().getSimpleName()%>: <%= acc.getAccountNumber()%> - $<%= acc.getBalance()%></option>
                                             <% }%>
                                         </select>
                                     </td>

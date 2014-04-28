@@ -113,7 +113,7 @@ public class InvestmentAccount extends Account implements Serializable {
         return result;
     }
 
-    public double calculateReturnOfInvestmentForClosedTermInvestment(Date today) {
+    private double calculateReturnOfInvestmentForClosedTermInvestment(Date today) {
 //        long duration = this.getInvestmentPlan().getDurationInDays();
         double returnOfInvestmentPercent = this.getInvestmentPlan().getInvestmentReturnsPercent();
         double returnOfInvestment = 0;
@@ -125,7 +125,7 @@ public class InvestmentAccount extends Account implements Serializable {
         return returnOfInvestment;
     }
 
-    public double calculateReturnOfInvestmentForOpenTermInvestment(Date today) {
+    private double calculateReturnOfInvestmentForOpenTermInvestment(Date today) {
 
         double returnOfInvestment = 0;
 

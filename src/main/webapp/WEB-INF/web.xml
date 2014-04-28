@@ -32,6 +32,10 @@
         <servlet-name>NewClientCardServlet</servlet-name>
         <servlet-class>com.soen.ebanking.servlet.NewClientCardServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CalculateInvestmentServlet</servlet-name>
+        <servlet-class>com.soen.ebanking.servlet.CalculateInvestmentServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>WithdawalServlet</servlet-name>
         <url-pattern>/WithdawalServlet</url-pattern>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>NewClientCardServlet</servlet-name>
         <url-pattern>/NewClientCardServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CalculateInvestmentServlet</servlet-name>
+        <url-pattern>/CalculateInvestmentServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

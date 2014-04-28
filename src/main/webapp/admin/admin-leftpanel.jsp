@@ -65,6 +65,16 @@
                         </table>
                     </a>
                 </li> 
+                <li><a href="calculateInvestment.jsp">					            
+                        <table>
+                            <tr>
+                                
+                                <td><span class="menu_link">Calculate Investment for All Clients</span></td>
+                            </tr>
+                        </table>
+                    </a>
+                </li>
+                
             </ul>
         </div>
     </div>
