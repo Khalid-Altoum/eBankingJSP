@@ -10,10 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- *
- * @author Khalid
- */
+
 public class Testing01 {
 
     public static void main(String[] args) {

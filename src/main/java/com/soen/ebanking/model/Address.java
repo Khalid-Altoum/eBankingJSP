@@ -11,10 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
-/**
- *
- * @author HMD
- */
 @Entity
 public class Address implements Serializable {
 

@@ -15,10 +15,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-/**
- *
- * @author Khalid
- */
 public class test1DB {
 
     public static void main(String[] args)  {

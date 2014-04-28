@@ -13,10 +13,7 @@ import java.util.Date;
 import java.util.List;
 import org.joda.time.DateTime;
 
-/**
- *
- * @author Peyman
- */
+
 public class test2DB {
     public static void main(String[] args) throws IllegalAccessException, InvocationTargetException {
         

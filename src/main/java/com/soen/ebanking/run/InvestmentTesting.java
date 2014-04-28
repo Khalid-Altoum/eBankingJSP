@@ -14,10 +14,6 @@ import com.soen.ebanking.utils.DateUtil;
 import java.util.Date;
 
 
-/**
- *
- * @author Khalid
- */
 public class InvestmentTesting {
     public static void main(String[] args) {
         

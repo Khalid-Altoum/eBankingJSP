@@ -29,7 +29,7 @@
                     <form  method="post"  name = "calculateInvestment"  action="/eBanking/CalculateInvestmentServlet">
                         <table>
                             <tr>
-                            <td>Expiry Date:</td>
+                            <td>End Date:</td>
                             <td><input name="date" type="text" size="20" ></td>
                             </tr>
                             <tr>

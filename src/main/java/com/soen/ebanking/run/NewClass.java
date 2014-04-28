@@ -13,10 +13,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 import org.joda.time.DateTime;
 
-/**
- *
- * @author Khalid
- */
+
 public class NewClass {
 
     public static void main(String[] args) throws IllegalAccessException, InvocationTargetException {
