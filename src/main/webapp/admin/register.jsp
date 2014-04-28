@@ -27,13 +27,13 @@
                         <tr>
                             <td>First Name:</td>
                             <td>
-                                <input name = "firstName" type="text" size="15">
+                                <input name = "firstName" type="text" size="20">
                             </td>
                         </tr>
                         <tr>
                             <td>Last Name:</td>
                             <td>
-                                <input name = "lastName" type="text" size="15">
+                                <input name = "lastName" type="text" size="20">
                             </td>
                         </tr>
                         <tr>
@@ -49,43 +49,43 @@
                         <tr>
                             <td>Age:</td>
                             <td>
-                                <input name = "age" type="text" size="15">
+                                <input name = "age" type="text" size="20">
                             </td>
                         </tr>
                         <tr>
                             <td>Email Address:</td>
                             <td>
-                                <input name = "email" type="text" size="15">
+                                <input name = "email" type="text" size="20">
                             </td>
                         </tr>
                         <tr>
                             <td>Phone Number:</td>
                             <td>
-                                <input name = "phoneNum" type="text" size="15">
+                                <input name = "phoneNum" type="text" size="20">
                             </td>
                         </tr>
                         <tr>
                             <td>Apartment Number:</td>
                             <td>
-                                <input name = "aptNum" type="text" size="15">
+                                <input name = "aptNum" type="text" size="20">
                             </td>
                         </tr>
                         <tr>
                             <td>Street Number:</td>
                             <td>
-                                <input name = "streetNum" type="text" size="15">
+                                <input name = "streetNum" type="text" size="20">
                             </td>
                         </tr>
                         <tr>
                             <td>Street Name:</td>
                             <td>
-                                <input name = "streetName" type="text" size="15">
+                                <input name = "streetName" type="text" size="20">
                             </td>
                         </tr>
                         <tr>
                             <td>City:</td>
                             <td>
-                                <input name = "city" type="text" size="15">
+                                <input name = "city" type="text" size="20">
                             </td>
                         </tr>
                         <tr>
@@ -103,7 +103,7 @@
                             <td>
                                 <select name="country">
                                         <option value="" disabled="disabled" selected="selected">- country -</option>
-                                        <option value="CA">CA</option>
+                                        <option value="CA">Canada</option>
                                         <option value="US">US</option>
                                 </select>
                             </td>
@@ -111,7 +111,7 @@
                         <tr>
                             <td>Postal Code:</td>
                             <td>
-                                <input name = "postCode" type="text" size="15" >
+                                <input name = "postCode" type="text" size="20" >
                             </td>
                         </tr>
                         <tr>

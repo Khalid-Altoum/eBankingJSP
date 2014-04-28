@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class AddInvestmentServlet extends HttpServlet {
 
@@ -19,17 +20,21 @@ public class AddInvestmentServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
         try {
-            String clientID, investmentID, investmentAccountNumber, accountID;
+            
+            String  investmentAccountNumber, accountID;
+            long clientID, investmentID;
             double balance = 0;
-            clientID = request.getParameter("clientID");
-            investmentID = request.getParameter("investmentID");
+            clientID = (Long) session.getAttribute("clientID");
+            investmentID = (Long)session.getAttribute("investmentID");
+            
             accountID = request.getParameter("accountID");
             investmentAccountNumber = request.getParameter("investmentAccountNumber");
             balance = Double.parseDouble(request.getParameter("balance"));
 
-            Client theClient = Client.getClientsById(Long.parseLong(clientID));
-            InvestmentPlan thePlan = InvestmentPlan.getInvestmentPlanById(Long.parseLong(investmentID));
+            Client theClient = Client.getClientsById(clientID);
+            InvestmentPlan thePlan = InvestmentPlan.getInvestmentPlanById(investmentID);
             Account fundsSource = Account.getAccountById(Long.parseLong(accountID));
 
             if (fundsSource.getBalance() < balance) {

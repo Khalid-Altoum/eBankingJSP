@@ -8,6 +8,7 @@ package com.soen.ebanking.servlet;
 
 import com.soen.ebanking.model.Address;
 import com.soen.ebanking.model.Client;
+import com.soen.ebanking.model.EWallet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -15,21 +16,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author rifengding
- */
 public class NewClientServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -72,6 +60,12 @@ public class NewClientServlet extends HttpServlet {
             cl.setAge(age);
             cl.setUserAddress(add);
             cl.saveUser();
+            
+            EWallet ew = new EWallet();
+            ew.setAccountNumber("eWallet");
+            ew.setClient(cl);
+            ew.saveAccount();
+            
             
             response.sendRedirect("./admin/adminFinished.jsp");
             //out.println(firstName);

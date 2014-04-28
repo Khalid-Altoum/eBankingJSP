@@ -18,17 +18,7 @@
         <link rel="stylesheet" href="../css/style.css" type="text/css" />
     </head>
     <body>
-         <jsp:useBean id="client" class="com.soen.ebanking.model.Client"></jsp:useBean>
-        <%
-            Long id = (Long) session.getAttribute("currentClientId");
 
-//            long id = Long.parseLong(idString);
-            if (id > 0) {
-                client = Client.getClientsById(id);
-                if (client == null){
-                out.println("Client is null");}
-            }
-        %>
         <div id="content">
 
             <div id="content">
@@ -42,13 +32,13 @@
                         <legend>
                             <h2 class="largeredtext">Add an Investment Plan</h2>
                         </legend>
-                        <form  name="frmAddInvestment" action="/eBanking/AddInvestmentServlet" method="post">
+                        <form  name="frmAddInvestment" action="/eBanking/admin/addInvestmentAccount.jsp" method="post">
                             <table>
                                 <tr>
                                     <td>Client Name:</td>
                                     <td>
-                                        <select name="clientID">
-                                            <option value="" disabled="disabled" selected="selected">- User Name -</option>
+                                        <select name="clientID"  >
+                                            <option value="" disabled="disabled" selected="selected">- Account  -</option>
                                             <%
                                                 List<Client> allClients = Client.getClients();
                                                 for (Client theClient : allClients) {
@@ -62,39 +52,19 @@
                                     <td>Investment Plan:</td>
                                     <td>
                                         <select name="investmentID">
-                                            <option value="" disabled="disabled" selected="selected">- User Name -</option>
+                                            <option value="" disabled="disabled" selected="selected">- Investment Plan -</option>
                                             <%
                                                 List<InvestmentPlan> allInvestmentPlans = InvestmentPlan.getInvestmentPlans();
                                                 for (InvestmentPlan investmentPlan : allInvestmentPlans) {
                                             %>  
                                             <option value = "<%=investmentPlan.getInvestmentPlanId()%>"> <%= investmentPlan.getClass().getSimpleName()%>: <%= investmentPlan.getDurationInDays()%> Days</option>>
                                             <%}%>
-                                          </select>   
+                                        </select>   
                                     </td>
                                 </tr>
-                                 <tr>
-                                    <td>New Investment Account Number:</td>
-                                     
-                                    <td><input name="investmentAccountNumber" type="text" size="20" value = ""></td>
-                                </tr>
                                 <tr>
-                                     <% List<Account> personalAccounts = (ArrayList)Account.getPersonalAccount(client.getAccounts()); %>
-                                    <td>Initial Account Balance:</td>
-                                    <select name="accountID">
-                                            <option value="" disabled="disabled" selected="selected">- User Name -</option>
-                                            <%
-                                               
-                                                for (Account anAccount : personalAccounts) {
-                                            %>  
-                                            <option value = "<%=anAccount.getAccountId() %>"> <%= anAccount.getClass().getSimpleName()%>: <%= anAccount.getAccountNumber()%> - $<%= anAccount.getBalance()%>  </option>>
-                                            <%}%>
-                                          </select>  
-                                    <td><input name="balance" type="text" size="20" value = "0.00"></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
                                     <td>
-                                        <button type="submit" name="submit">OK</button>
+                                        <button type="submit" name="submit">Next</button>
                                     </td>
                                 </tr>
                             </table>
