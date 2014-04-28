@@ -22,7 +22,7 @@
                 <div class="bodytext">
                     <strong class="largeredtext">Register a New Client</strong>
                     <p></p>
-                    <form name = "newClient" method = "post" action="/eBankingJSP/NewClientServlet">
+                    <form name = "newClient" method = "post" action="/eBanking/NewClientServlet">
                     <table>
                         <tr>
                             <td>First Name:</td>

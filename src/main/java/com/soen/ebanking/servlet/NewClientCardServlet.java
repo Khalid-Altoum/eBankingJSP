@@ -2,9 +2,9 @@ package com.soen.ebanking.servlet;
 
 import com.soen.ebanking.model.Client;
 import com.soen.ebanking.model.ClientCard;
+import com.soen.ebanking.utils.SHA1Util;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
@@ -21,7 +21,7 @@ public class NewClientCardServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        HttpSession session=request.getSession();
+        HttpSession session = request.getSession();
         try {
 
             String cardNumber, clientPassword, confirmClientPassword;
@@ -30,12 +30,17 @@ public class NewClientCardServlet extends HttpServlet {
             clientPassword = request.getParameter("clientPassword");
             confirmClientPassword = request.getParameter("confirmClientPassword");
 
-            if (!clientPassword.equals(confirmClientPassword)) {
-                 session.setAttribute("successfulMSG", "");
-               session.setAttribute("errorMSG", "Error: Password & Confirm password mismatch! "); 
+            if (clientPassword.length() < 6 || clientPassword.length() > 20) {
+                session.setAttribute("successfulMSG", "");
+                session.setAttribute("errorMSG", "Error: Password length should be between 6 and 20. ");
                 response.sendRedirect("./admin/addClientCard.jsp");
                 return;
-
+            }
+            if (!clientPassword.equals(confirmClientPassword)) {
+                session.setAttribute("successfulMSG", "");
+                session.setAttribute("errorMSG", "Error: Password & Confirm password mismatch! ");
+                response.sendRedirect("./admin/addClientCard.jsp");
+                return;
             }
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
             java.util.Date expiryDate = null;
@@ -49,8 +54,8 @@ public class NewClientCardServlet extends HttpServlet {
             Client cl = Client.getClientsById(clientID);
             ClientCard cc = new ClientCard(cardNumber, expiryDate, cl);
             cc.saveClientCard();
-
-            cl.setPassword(clientPassword);
+            String passwordSHA = SHA1Util.sha1(clientPassword);
+            cl.setPassword(passwordSHA);
             cl.setUserName(cardNumber);
             cl.updateUser();
 

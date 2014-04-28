@@ -29,6 +29,15 @@
                         </table>
                     </a>
                 </li>
+                <li><a href="addClientCard.jsp">
+                        <table>
+                            <tr>
+                               
+                                <td><span class="menu_link">Add Client-Card</span></td>
+                            </tr>
+                        </table>
+                    </a>
+                </li>
                 <li><a href="addAccount.jsp">
                         <table>
                             <tr>

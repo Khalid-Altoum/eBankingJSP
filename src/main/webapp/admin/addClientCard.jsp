@@ -30,7 +30,6 @@
                         <table>
                             <tr>
                                 <td>Client Name:</td>
-                                <td></td>
                                 <td>
                                     <select name="clientID">
                                         <option value="" disabled="disabled" selected="selected">- User Name -</option>
@@ -50,18 +49,19 @@
                             </tr>
                             <td>Expiry Date:</td>
                             <td><input name="expiryDate" type="text" size="20" ></td>
+                            <td> yyyy/mm/dd e.x 2015/01/31  </td>
                             </tr>
                             <td>Client Password:</td>
                             <td><input name="clientPassword" type="password" size="20" ></td>
+                            <td> Password length between 6 to 20  </td>
                             </tr>
                             <td>Confirm Client Password:</td>
                             <td><input name="confirmClientPassword" type="password" size="20" ></td>
                             </tr>
+                            
                             <tr>
-                                <td></td>
-                                <td></td>
                                 <td>
-                                    <button type="submit" name="submit">OK</button>
+                                    <button type="submit" name="submit">OK</button> </td><td>
                                     &nbsp;&nbsp;&nbsp;&nbsp;
                                     <button type="reset" name="reset">Reset</button>
                                 </td>
