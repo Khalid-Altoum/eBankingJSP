@@ -1,60 +1,60 @@
 package com.soen.ebanking.servlet;
 
-import com.soen.ebanking.model.Account;
 import com.soen.ebanking.model.Client;
-import com.soen.ebanking.model.InvestmentAccount;
-import com.soen.ebanking.model.InvestmentPlan;
-import com.soen.ebanking.utils.DateUtil;
+import com.soen.ebanking.model.ClientCard;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class AddInvestmentServlet extends HttpServlet {
+public class NewClientCardServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        HttpSession session = request.getSession();
+        HttpSession session=request.getSession();
         try {
-            
-            String  investmentAccountNumber, accountID;
-            long clientID, investmentID;
-            double balance = 0;
-            clientID = (Long) session.getAttribute("clientID");
-            investmentID = (Long)session.getAttribute("investmentID");
-            
-            accountID = request.getParameter("accountID");
-            investmentAccountNumber = request.getParameter("investmentAccountNumber");
-            balance = Double.parseDouble(request.getParameter("balance"));
 
-            Client theClient = Client.getClientsById(clientID);
-            InvestmentPlan thePlan = InvestmentPlan.getInvestmentPlanById(investmentID);
-            Account fundsSource = Account.getAccountById(Long.parseLong(accountID));
+            String cardNumber, clientPassword, confirmClientPassword;
+            cardNumber = request.getParameter("cardNumber");
+            // Date expiryDate = Date.valueOf( );
+            clientPassword = request.getParameter("clientPassword");
+            confirmClientPassword = request.getParameter("confirmClientPassword");
 
-            if (fundsSource.getBalance() < balance) {
-                  session.setAttribute("successfulMSG22", "");
-               session.setAttribute("errorMSG22", "Error: Password & Confirm password mismatch! "); 
-                response.sendRedirect("./admin/addInvestment.jsp");
+            if (!clientPassword.equals(confirmClientPassword)) {
+                 session.setAttribute("successfulMSG", "");
+               session.setAttribute("errorMSG", "Error: Password & Confirm password mismatch! "); 
+                response.sendRedirect("./admin/addClientCard.jsp");
                 return;
 
-            } else {
-
-                
-                Date endDate = DateUtil.addDays(new Date(), thePlan.getDurationInDays());
-                InvestmentAccount iAcc = new InvestmentAccount(new Date(), endDate, thePlan);
-                iAcc.setAccountNumber(investmentAccountNumber);
-                iAcc.setClient(theClient);
-                iAcc.saveAccount();
-                
-                Account.transfer(fundsSource, iAcc, balance, "$" + balance + " from " + fundsSource.getAccountNumber() + " to Inverstment Account: " + iAcc.getAccountNumber());
-                response.sendRedirect("./admin/adminFinished.jsp");
             }
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+            java.util.Date expiryDate = null;
+            try {
+                expiryDate = sdf.parse(request.getParameter("expiryDate"));
+            } catch (ParseException ex) {
+                Logger.getLogger(NewClientCardServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            long clientID = Long.parseLong(request.getParameter("clientID"));
+            Client cl = Client.getClientsById(clientID);
+            ClientCard cc = new ClientCard(cardNumber, expiryDate, cl);
+            cc.saveClientCard();
+
+            cl.setPassword(clientPassword);
+            cl.setUserName(cardNumber);
+            cl.updateUser();
+
+            response.sendRedirect("./admin/adminFinished.jsp");
         } finally {
             out.close();
         }

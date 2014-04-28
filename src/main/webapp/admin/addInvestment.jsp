@@ -68,7 +68,19 @@
                                     </td>
                                 </tr>
                             </table>
+                            <%
+                                String successString = (session.getAttribute("successfulMSG22") != null) ? (String) session.getAttribute("successfulMSG22") : " ";
+                                String errorString = (session.getAttribute("errorMSG22") != null) ? (String) session.getAttribute("errorMSG22") : " ";
+                            %>      
+                            <p style="font-style:italic;"> <b style="color:#00FF00"> <%= successString%>  </b></p>           
+                            <p style="font-style:italic;"> <b style="color:#F00"> <%= errorString%> </b></p>
+
+
                         </form>
+                        <%
+                            session.removeAttribute("successfulMSG22");
+                            session.removeAttribute("errorMSG22");
+                        %>
                         <br/>
                         <br/>
                     </div>
