@@ -29,7 +29,7 @@
 //            long id = Long.parseLong(idString);
             if (clientID > 0 && investmentID > 0) {
                 client = Client.getClientsById(clientID);
-                
+                investment=InvestmentPlan.getInvestmentPlanById(investmentID);
             }
        
        %>
@@ -76,7 +76,16 @@
                                     </td>
                                 </tr>
                             </table>
+                                </div>
+                          <%
+                            String successString = (session.getAttribute("successfulMSG00") != null) ? (String) session.getAttribute("successfulMSG00") : " ";
+                            String errorString = (session.getAttribute("errorMSG00") != null) ? (String) session.getAttribute("errorMSG00") : " ";
+                        %>
                         </form>
+                          <%
+                            session.removeAttribute("successfulMSG00");
+                            session.removeAttribute("errorMSG00");
+                        %>      
                         <br/>
                         <br/>
                     </div>

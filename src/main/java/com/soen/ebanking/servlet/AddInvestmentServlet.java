@@ -40,7 +40,7 @@ public class AddInvestmentServlet extends HttpServlet {
             if (fundsSource.getBalance() < balance) {
                   session.setAttribute("successfulMSG22", "");
                session.setAttribute("errorMSG22", "Error: Password & Confirm password mismatch! "); 
-                response.sendRedirect("./admin/addInvestment.jsp");
+                response.sendRedirect("/eBanknig/admin/addInvestment.jsp");
                 return;
 
             } else {

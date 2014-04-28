@@ -26,12 +26,12 @@ public class CalculateInvestmentServlet extends HttpServlet {
         HttpSession session = request.getSession();
         try {
              SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-            java.util.Date date = null;
+            java.util.Date date = new Date();
             try {
                 date = sdf.parse(request.getParameter("date"));
             } catch (ParseException ex) {
                 session.setAttribute("errorMSG", "Error: Password & Confirm password mismatch! ");
-                response.sendRedirect("./admin/calculateInvestment.jsp");
+                response.sendRedirect("/eBanking/admin/calculateInvestment.jsp");
             }
             
             List<InvestmentAccount> ias = InvestmentAccount.getInvestmentAccounts();

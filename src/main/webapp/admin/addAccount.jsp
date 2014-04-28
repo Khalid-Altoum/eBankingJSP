@@ -1,8 +1,4 @@
-<%-- 
-    Document   : addAccount
-    Created on : Apr 27, 2014, 11:19:05 AM
-    Author     : Hongrui Guan
---%>
+
 
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

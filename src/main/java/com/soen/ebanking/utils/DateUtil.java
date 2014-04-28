@@ -50,16 +50,16 @@ public class DateUtil {
     }
 
     public static Date addDays(Date date, int days) {
-        Date newDate ;
+        Date newDate = null ;
         try {
             
          Calendar cal = Calendar.getInstance();  
          cal.setTime(date);  
          cal.add(Calendar.DATE, days); // add 10 days  
           newDate = cal.getTime();              
-        } catch (Exception e) {
-            return null;
+        } finally  {
+            return newDate;
         }
-        return newDate;
+        
     }
 }
