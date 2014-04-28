@@ -44,7 +44,7 @@
                     <div class="bodytext">
 
                         <legend>
-                            <h2 class="largeredtext">Add an Investment Plan</h2>
+                            <h2 class="largeredtext">Add an Investment Account</h2>
                         </legend>
                         <form  name="frmAddInvestment" action="/eBanking/AddInvestmentServlet" method="post">
                             <table>

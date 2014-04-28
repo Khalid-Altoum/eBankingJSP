@@ -54,6 +54,11 @@
                                 </select>
                             </td>
                         </tr>
+                         <tr>
+                            <td>Account Number</td>
+                            <td>$</td>
+                            <td><input name="accountNumber" type="text" size="20" ></td>
+                        </tr>
                         <tr>
                             <td>Account Balance:</td>
                             <td>$</td>

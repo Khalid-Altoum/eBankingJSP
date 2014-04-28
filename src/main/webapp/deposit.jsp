@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Deposit Checks</title>
+        <title>Deposit</title>
         <link href="./css/style.css" rel="stylesheet" type="text/css" />
     </head>
 
@@ -32,7 +32,7 @@
                     <form name="deposit" action="DepositServlet" method="post">
                         <fieldset class="fieldallign">
                             <legend>
-                                <h2 class="titletext">Checks Deposit</h2>
+                                <h2 class="titletext">Deposit</h2>
                             </legend>
                             <table align="center">
                                 <tr>

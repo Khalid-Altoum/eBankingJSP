@@ -42,7 +42,7 @@
                         <table>
                             <tr>
                                
-                                <td><span class="menu_link">New Bank Account</span></td>
+                                <td><span class="menu_link">Add Account for Client</span></td>
                             </tr>
                         </table>
                     </a>
@@ -51,7 +51,7 @@
                         <table>
                             <tr>
                                 
-                                <td><span class="menu_link">New Investment Plan</span></td>
+                                <td><span class="menu_link">Add Investment Plan</span></td>
                             </tr>
                         </table>
                     </a>
@@ -60,7 +60,7 @@
                         <table>
                             <tr>
                                 
-                                <td><span class="menu_link">Investment for Client</span></td>
+                                <td><span class="menu_link">Add Investment for Client</span></td>
                             </tr>
                         </table>
                     </a>

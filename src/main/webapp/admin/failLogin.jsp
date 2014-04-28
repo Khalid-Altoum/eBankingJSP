@@ -15,13 +15,13 @@
         <div> <span class="largeredtext"> Admin Login Error!</span> </div>
       <div class="bodytext">
         <h3>Please check your user id and password, and try again</h3>
-        <p class="smallgraytext">You can try to <a href="/admin/index.jsp">login</a> <strong>THREE</strong> times before your account being locked.</p>
+        <p class="smallgraytext">You can try to <a href="/eBanking/admin/index.jsp">login</a> <strong>THREE</strong> times before your account being locked.</p>
       </div>
     </div>
     <div id="leftpanel">
       <div class="graypanel"> <span class="smalltitle">Remember!</span><br />
         <br />
-        <span> You can try to <a href="/admin/index.jsp">login</a> <strong>THREE</strong> times before your account being locked.</span><br />
+        <span> You can try to <a href="/eBanking/admin/index.jsp">login</a> <strong>THREE</strong> times before your account being locked.</span><br />
       </div>
     </div>
     <div id="footer-container"> <jsp:include page="../site-footer.jsp"/></div>

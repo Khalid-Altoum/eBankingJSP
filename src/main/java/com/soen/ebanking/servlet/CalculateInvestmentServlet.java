@@ -37,7 +37,8 @@ public class CalculateInvestmentServlet extends HttpServlet {
             List<InvestmentAccount> ias = InvestmentAccount.getInvestmentAccounts();
             for(InvestmentAccount ia : ias){
             double profit  = ia.calculateReturnOfInvestment(date);
-            ia.setBalance(ia.getBalance()+profit);
+            double roundOff = Math.round(profit * 100.0) / 100.0;
+            ia.setBalance(ia.getBalance()+roundOff);
             ia.saveAccount();
             }
             

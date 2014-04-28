@@ -25,19 +25,22 @@ public class NewAccountServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             /* TODO output your page here. You may use following sample code. */
-            String clientID, accountType;
+            String clientID, accountType, accountNumber;
             Double balance;
             clientID = request.getParameter("clientID");
             accountType = request.getParameter("accountType");
             balance = Double.parseDouble(request.getParameter("balance"));
+            accountNumber = request.getParameter("accountNumber");
             
             Client theClient = Client.getClientsById(Long.parseLong(clientID));
             
             Account newAccount; 
             if (accountType.equals("Saving")) {
                 newAccount= new SavingAccount(balance,theClient);
+                newAccount.setAccountNumber(accountNumber);
             } else {
                 newAccount= new ChequingAccount(balance,theClient);
+                newAccount.setAccountNumber(accountNumber);
             }
             newAccount.saveAccount();
             response.sendRedirect("./admin/adminFinished.jsp");

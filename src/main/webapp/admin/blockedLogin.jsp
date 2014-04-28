@@ -24,7 +24,7 @@
     <div id="leftpanel">
       <div class="graypanel"> <span class="smalltitle">Remember!</span><br />
         <br />
-        <span> You can try to <a href="/admin/index.jsp">login</a> <strong>THREE</strong> times before your account being locked.</span><br />
+        <span> You can try to <a href="/eBanking/admin/index.jsp">login</a> <strong>THREE</strong> times before your account being locked.</span><br />
       </div>
     <div id="footer-container"> <jsp:include page="../site-footer.jsp"/></div>
   </div>
