@@ -27,17 +27,19 @@ public class SavingAccount extends Account implements Serializable{
     
     
       public void saveSavingAccount() {
-        ObjectDao savingAccountDao = new ObjectDao();
+        ObjectDao<SavingAccount> savingAccountDao = new ObjectDao<SavingAccount>();
         savingAccountDao.addObject(this);
     }
 
-    public void updateSavingAccount() throws IllegalAccessException, InvocationTargetException {
-        ObjectDao savingAccountDao = new ObjectDao();
+    @Override
+    public void updateAccount()  {
+        ObjectDao<SavingAccount> savingAccountDao = new ObjectDao<SavingAccount>();
         savingAccountDao.updateObject(this, this.getAccountId(), SavingAccount.class);
     }
 
-    public void deleteSavingAccount() throws IllegalAccessException, InvocationTargetException {
-        ObjectDao savingAccountDao = new ObjectDao();
+    @Override
+    public void deleteAccount()  {
+        ObjectDao<SavingAccount> savingAccountDao = new ObjectDao<SavingAccount>();
         savingAccountDao.deleteObject(this, this.getAccountId(), SavingAccount.class);
     }
 

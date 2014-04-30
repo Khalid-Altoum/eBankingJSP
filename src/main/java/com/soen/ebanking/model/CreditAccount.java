@@ -85,18 +85,18 @@ public class CreditAccount extends Account implements Serializable {
 
     @Override
     public void saveAccount() {
-        ObjectDao creditAccountDao = new ObjectDao();
+        ObjectDao<CreditAccount> creditAccountDao = new ObjectDao<CreditAccount>();
          creditAccountDao.addObject(this);
     }
 
     @Override
     public void updateAccount()  {
-        ObjectDao creditAccountDao = new ObjectDao();
+        ObjectDao<CreditAccount> creditAccountDao = new ObjectDao<CreditAccount>();
         creditAccountDao.updateObject(this, this.getAccountId(), CreditAccount.class);
     }
 
     public void deleteCreditAccount()  {
-        ObjectDao creditAccountDao = new ObjectDao();
+        ObjectDao<CreditAccount> creditAccountDao = new ObjectDao<CreditAccount>();
         creditAccountDao.deleteObject(this, this.getAccountId(), CreditAccount.class);
     }
 

@@ -25,7 +25,7 @@
         Long investmentID = Long.parseLong(request.getParameter("investmentID"));
 
         session.setAttribute("clientID", clientID);
-        session.setAttribute("investmentID", clientID);
+        session.setAttribute("investmentID", investmentID);
 //            long id = Long.parseLong(idString);
             if (clientID > 0 && investmentID > 0) {
                 client = Client.getClientsById(clientID);

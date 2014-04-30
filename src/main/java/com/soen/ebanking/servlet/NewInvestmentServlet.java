@@ -16,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class NewInvestmentServlet extends HttpServlet {
 
@@ -23,31 +24,34 @@ public class NewInvestmentServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
         try {
-           String investmentType = request.getParameter("investmentType");
-           
-            double investmentReturnsPercent=0;
+            String investmentType = request.getParameter("investmentType");
+
+            double investmentReturnsPercent = 0;
             if (request.getParameter("investmentReturnsPercent") != null) {
                 investmentReturnsPercent = Double.parseDouble(request.getParameter("investmentReturnsPercent"));
             }
 
-            int durationInDays=0;
+            int durationInDays = 0;
             if (request.getParameter("durationInDays") != null) {
                 durationInDays = Integer.parseInt(request.getParameter("durationInDays"));
             }
 
-            double penaltyPercent=0;
+            double penaltyPercent = 0;
             if (request.getParameter("penaltyPercent") != null) {
                 penaltyPercent = Double.parseDouble(request.getParameter("penaltyPercent"));
             }
-
+            if (session != null) {
+                session.invalidate();
+            }
             InvestmentPlan newInvestmentPlan;
             if (investmentType.equals("closed")) {
                 newInvestmentPlan = new ClosedTermInvestment(penaltyPercent, durationInDays, investmentReturnsPercent);
             } else {
-               newInvestmentPlan = new OpenTermInvestment(penaltyPercent, durationInDays, investmentReturnsPercent);
+                newInvestmentPlan = new OpenTermInvestment(penaltyPercent, durationInDays, investmentReturnsPercent);
             }
-            
+
             newInvestmentPlan.saveInvestmentPlan();
             response.sendRedirect("./admin/adminFinished.jsp");
         } finally {

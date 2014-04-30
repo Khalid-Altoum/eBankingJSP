@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class NewClientServlet extends HttpServlet {
 
@@ -22,6 +23,7 @@ public class NewClientServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
         try {
             String streetNum,streetName,apartmentNum,city,province,postalCode,country;
             streetNum = request.getParameter("streetNum");
@@ -51,6 +53,10 @@ public class NewClientServlet extends HttpServlet {
             
             Integer age = Integer.parseInt(request.getParameter("age"));
             
+             if (session != null) {
+                session.invalidate();
+            }
+             
             Client cl = new Client();
             cl.setFirstName(firstName);
             cl.setLastName(lastName);

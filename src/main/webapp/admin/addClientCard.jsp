@@ -21,6 +21,12 @@
                         <h2 class="largeredtext">Add New Client Card</h2>
                     </legend>
                     <form name = "newClient" method = "post" action="/eBanking/NewClientCardServlet">
+                         <script>
+                            $(function() {
+                                $("#datepicker").datepicker();
+                            });
+
+                        </script>
                         <table>
                             <tr>
                                 <td>Client Name:</td>
@@ -43,8 +49,8 @@
                             </tr>
                             <tr>
                             <td>Expiry Date:</td>
-                            <td><input name="expiryDate" type="text" size="20" ></td>
-                            <td> yyyy/mm/dd e.x 2015/01/31  </td>
+                            <td><input name="expiryDate" type="text" size="20" id="datepicker"></td>
+                            <td>    </td>
                             </tr>
                             <tr>
                             <td>Client Password:</td>

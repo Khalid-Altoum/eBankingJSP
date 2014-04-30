@@ -40,7 +40,7 @@ public class PayeeAccount extends Account implements Serializable{
     }
 
     @Override
-    public void deleteAccount() throws IllegalAccessException, InvocationTargetException {
+    public void deleteAccount()  {
         ObjectDao payeeAccount = new ObjectDao();
         payeeAccount.deleteObject(this, this.getAccountId(), PayeeAccount.class);
     }

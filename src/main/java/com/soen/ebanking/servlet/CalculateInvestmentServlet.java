@@ -7,25 +7,21 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
 public class CalculateInvestmentServlet extends HttpServlet {
 
-   
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
         try {
-             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
             java.util.Date date = new Date();
             try {
                 date = sdf.parse(request.getParameter("date"));
@@ -33,15 +29,17 @@ public class CalculateInvestmentServlet extends HttpServlet {
                 session.setAttribute("errorMSG", "Error: Password & Confirm password mismatch! ");
                 response.sendRedirect("/eBanking/admin/calculateInvestment.jsp");
             }
-            
-            List<InvestmentAccount> ias = InvestmentAccount.getInvestmentAccounts();
-            for(InvestmentAccount ia : ias){
-            double profit  = ia.calculateReturnOfInvestment(date);
-            double roundOff = Math.round(profit * 100.0) / 100.0;
-            ia.setBalance(ia.getBalance()+roundOff);
-            ia.saveAccount();
+            if (session != null) {
+                session.invalidate();
             }
-            
+            List<InvestmentAccount> ias = InvestmentAccount.getInvestmentAccounts();
+            for (InvestmentAccount ia : ias) {
+                double profit = ia.calculateReturnOfInvestment(date);
+                double newBalance = ia.getBalance()+ ( (double) Math.round(profit * 100.0) / 100.0);
+                ia.setBalance( newBalance);
+                ia.updateAccount();
+            }
+
             response.sendRedirect("./admin/adminFinished.jsp");
         } finally {
             out.close();

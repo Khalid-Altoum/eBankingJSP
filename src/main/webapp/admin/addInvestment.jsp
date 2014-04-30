@@ -1,9 +1,3 @@
-<%-- 
-    Document   : addInvestment
-    Created on : Apr 27, 2014, 11:11:44 AM
-    Author     : Hongrui Guan
---%>
-
 <%@page import="com.soen.ebanking.model.Account"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.ArrayList"%>
@@ -38,7 +32,7 @@
                                     <td>Client Name:</td>
                                     <td>
                                         <select name="clientID"  >
-                                            <option value="" disabled="disabled" selected="selected">- Account  -</option>
+                                            <option value="" disabled="disabled" selected="selected">- Client Name  -</option>
                                             <%
                                                 List<Client> allClients = Client.getClients();
                                                 for (Client theClient : allClients) {

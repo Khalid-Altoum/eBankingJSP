@@ -22,36 +22,37 @@ public class AddInvestmentServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
         try {
-            
-            String  investmentAccountNumber, accountID;
+
+            String investmentAccountNumber, accountID;
             long clientID, investmentID;
             double balance = 0;
             clientID = (Long) session.getAttribute("clientID");
-            investmentID = (Long)session.getAttribute("investmentID");
-            
+            investmentID = (Long) session.getAttribute("investmentID");
             accountID = request.getParameter("accountID");
             investmentAccountNumber = request.getParameter("investmentAccountNumber");
             balance = Double.parseDouble(request.getParameter("balance"));
+
+            if (session != null) {
+                session.invalidate();
+            }
 
             Client theClient = Client.getClientsById(clientID);
             InvestmentPlan thePlan = InvestmentPlan.getInvestmentPlanById(investmentID);
             Account fundsSource = Account.getAccountById(Long.parseLong(accountID));
 
             if (fundsSource.getBalance() < balance) {
-                  session.setAttribute("successfulMSG22", "");
-               session.setAttribute("errorMSG22", "Error: Password & Confirm password mismatch! "); 
+                session.setAttribute("successfulMSG22", "");
+                session.setAttribute("errorMSG22", "Error: Password & Confirm password mismatch! ");
                 response.sendRedirect("/eBanknig/admin/addInvestment.jsp");
-                return;
 
             } else {
 
-                
                 Date endDate = DateUtil.addDays(new Date(), thePlan.getDurationInDays());
                 InvestmentAccount iAcc = new InvestmentAccount(new Date(), endDate, thePlan);
                 iAcc.setAccountNumber(investmentAccountNumber);
                 iAcc.setClient(theClient);
                 iAcc.saveAccount();
-                
+
                 Account.transfer(fundsSource, iAcc, balance, "$" + balance + " from " + fundsSource.getAccountNumber() + " to Inverstment Account: " + iAcc.getAccountNumber());
                 response.sendRedirect("./admin/adminFinished.jsp");
             }

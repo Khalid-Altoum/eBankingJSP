@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -42,15 +40,18 @@ public class NewClientCardServlet extends HttpServlet {
                 response.sendRedirect("./admin/addClientCard.jsp");
                 return;
             }
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
             java.util.Date expiryDate = null;
             try {
                 expiryDate = sdf.parse(request.getParameter("expiryDate"));
             } catch (ParseException ex) {
-               session.setAttribute("errorMSG", "Error: Date is not in the write format! ");
-                response.sendRedirect("./admin/addClientCard.jsp");  
+                session.setAttribute("errorMSG", "Error: Date is not in the write format! ");
+                response.sendRedirect("./admin/addClientCard.jsp");
             }
-
+            
+            if (session != null) {
+                session.invalidate();
+            }
             long clientID = Long.parseLong(request.getParameter("clientID"));
             Client cl = Client.getClientsById(clientID);
             ClientCard cc = new ClientCard(cardNumber, expiryDate, cl);

@@ -74,14 +74,14 @@ public class InvestmentAccount extends Account implements Serializable {
     }
 
     @Override
-    public void updateAccount() throws IllegalAccessException, InvocationTargetException {
+    public void updateAccount()  {
         ObjectDao<InvestmentAccount> investmentAccountDao = new ObjectDao<InvestmentAccount>();
         this.endDate = DateUtil.addDays(this.startDate, this.investmentPlan.getDurationInDays());
         investmentAccountDao.updateObject(this, this.getAccountId(), InvestmentAccount.class);
     }
 
     @Override
-    public void deleteAccount() throws IllegalAccessException, InvocationTargetException {
+    public void deleteAccount()  {
         ObjectDao investmentAccountDao = new ObjectDao();
         investmentAccountDao.deleteObject(this, this.getAccountId(), InvestmentAccount.class);
     }

@@ -16,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class NewAccountServlet extends HttpServlet {
 
@@ -23,6 +24,7 @@ public class NewAccountServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        HttpSession session=request.getSession();
         try {
             /* TODO output your page here. You may use following sample code. */
             String clientID, accountType, accountNumber;
@@ -32,6 +34,7 @@ public class NewAccountServlet extends HttpServlet {
             balance = Double.parseDouble(request.getParameter("balance"));
             accountNumber = request.getParameter("accountNumber");
             
+           
             Client theClient = Client.getClientsById(Long.parseLong(clientID));
             
             Account newAccount; 

@@ -139,12 +139,12 @@ public class Account implements Serializable {
         accountDao.addObject(this);
     }
 
-    public void updateAccount() throws IllegalAccessException, InvocationTargetException {
+    public void updateAccount()  {
         ObjectDao<Account> accountDao = new ObjectDao<Account>();
         accountDao.updateObject(this, this.getAccountId(), Account.class);
     }
 
-    public void deleteAccount() throws IllegalAccessException, InvocationTargetException {
+    public void deleteAccount()  {
         ObjectDao<Account> accountDao = new ObjectDao<Account>();
         accountDao.deleteObject(this, this.getAccountId(), Account.class);
     }
