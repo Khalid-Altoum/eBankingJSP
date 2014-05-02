@@ -6,10 +6,8 @@
 package com.soen.ebanking.model;
 
 import com.soen.ebanking.dao.ObjectDao;
-import com.soen.ebanking.utils.JodaDateTimeConverter;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.*;
 

@@ -23,7 +23,7 @@
     <class>com.soen.ebanking.model.UserRole</class>
     <class>com.soen.ebanking.model.Admin</class>
     <class>com.soen.ebanking.model.EWallet</class>
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="eclipselink.jdbc.password" value="1234"/>
       <property name="eclipselink.jdbc.user" value="root"/>

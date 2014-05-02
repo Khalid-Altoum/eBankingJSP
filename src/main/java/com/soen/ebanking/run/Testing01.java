@@ -61,7 +61,7 @@ public class Testing01 {
         
         
         
-         Admin admin = new Admin();
+        Admin admin = new Admin();
         admin.setFirstName("Admin");
         admin.setLastName("Admin");
         admin.setEmail("peyman@gmail.com");

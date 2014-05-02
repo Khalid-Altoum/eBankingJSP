@@ -11,7 +11,6 @@ import com.soen.ebanking.model.CreditPlan;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 import java.util.List;
-import org.joda.time.DateTime;
 
 
 public class test2DB {
